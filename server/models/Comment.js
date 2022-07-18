@@ -17,6 +17,11 @@ const commentSchema = new Schema(
     username: {
       type: String,
       required: true
+    },
+    //movie is 0, book is 1
+    movieOrBook : {
+      type: Boolean,
+      required: true
     }
   },
   {
