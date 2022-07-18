@@ -8,7 +8,7 @@ type Comment {
   commentText: String
   createdAt: String
   username: String
-  movieBetter: Boolean
+  movieorbook: Int
 }
 
 type Query {
@@ -16,7 +16,7 @@ type Query {
 }
 
 type Query {
-  comments(movieBetter: Boolean): [Comment]
+  comments(movieorbook: Int): [Comment]
 }
 `;
 

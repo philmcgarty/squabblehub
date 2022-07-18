@@ -25,11 +25,11 @@ db.once('open', async () => {
   let createdComments = [];
   for (let i = 0; i < 100; i += 1) {
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-    const movieBetter = Math.round(Math.random(0.5));
+    const movieorbook = Math.round(Math.random(0.5)+1);
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdComment = await Comment.create({ commentText, username, movieBetter });
+    const createdComment = await Comment.create({ commentText, username, movieorbook });
 
     const updatedUser = await User.updateOne(
       { _id: userId },

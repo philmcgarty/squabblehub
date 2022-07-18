@@ -18,8 +18,9 @@ const commentSchema = new Schema(
       type: String,
       required: true
     },
-    movieBetter: {
-      type: Boolean,
+    //Movie 1 - Book 2
+    movieorbook: {
+      type: Number,
       required: true
     }
   },
