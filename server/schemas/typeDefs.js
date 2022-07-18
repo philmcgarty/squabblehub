@@ -12,7 +12,11 @@ type Comment {
 }
 
 type Query {
-  comments: [Comment]
+  comments(username: String): [Comment]
+}
+
+type Query {
+  comments(movieBetter: Boolean): [Comment]
 }
 `;
 
