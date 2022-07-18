@@ -19,9 +19,9 @@ const commentSchema = new Schema(
       required: true
     },
     //movie is 0, book is 1
-    movieOrBook : {
+    movieOrBook: {
       type: Boolean,
-      required: true
+      // required: true
     }
   },
   {

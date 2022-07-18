@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/philmcgarty/squabblehub#readme",
   "devDependencies": {
+    "@faker-js/faker": "^7.3.0",
     "concurrently": "^7.2.2"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.10.0",
+    "graphql": "^16.5.0"
   }
 }
