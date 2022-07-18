@@ -1,9 +1,15 @@
+const {User, Comment } = require('../models');
+
 const resolvers = {
   Query: {
-    helloWorld: () => {
-      return 'Hello World';
+    comments: async () => {
+      return Comment.find().sort({ createdAt: -1 });
     }
-  }
+  },
+
+  // Query: {
+  //   helloWorld: () => {return 'Hello woooooorld!';}
+  // }
 };
 
 module.exports = resolvers

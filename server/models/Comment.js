@@ -17,6 +17,10 @@ const commentSchema = new Schema(
     username: {
       type: String,
       required: true
+    },
+    movieBetter: {
+      type: Boolean,
+      required: true
     }
   },
   {
