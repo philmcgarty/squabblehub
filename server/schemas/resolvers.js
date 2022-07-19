@@ -11,7 +11,7 @@ const resolvers = {
 
     //get filtered comments by User
     commentsByUser: async (parent, { username }) => {
-      //params may or may not have a filter based on the movie/book preference
+      //params may or may not have a filter based on the username
       const params = username ? { username } : {};
       return Comment.find(params).sort({ createdAt: -1 });
     },
