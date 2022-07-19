@@ -1,5 +1,6 @@
 const {User, Comment } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require("../utils/auth");
 
 
 const resolvers = {
@@ -37,11 +38,12 @@ const resolvers = {
     },
   },
 
-  Mutation: {
+  Mutation: {// passing the user object to signToken() functionso username, email, and _id properties are added to the token.
     // adding a new user
     userSignup: async (parent, args) => {
       const user = await User.create(args);
-      return user
+      const token = signToken(user);
+      return { token, user };
     },
 
     //login in
@@ -56,7 +58,8 @@ const resolvers = {
       if(!correctPw){
         throw new AuthenticationError("Mmm please try again, we couldn't recognize you!")
       }
-      return user;
+      const token = signToken(user)
+      return { token, user};
     }
   },
 };

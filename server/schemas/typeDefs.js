@@ -19,6 +19,11 @@ type User {
   comments: [Comment]
 }
 
+type Auth {
+  token: ID!
+  user: User
+}
+
 type Query {
   commentsByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
@@ -29,9 +34,11 @@ type Query {
 }
 
 type Mutation {
-  userLogin(email: String!, password: String!): User
-  userSignup(username: String!, email: String!, password: String!): User
+  userLogin(email: String!, password: String!): Auth
+  userSignup(username: String!, email: String!, password: String!): Auth
 }
+
+
 
 `;
 
