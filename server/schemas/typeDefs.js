@@ -31,6 +31,7 @@ type Query {
 
   usersAll: [User]
   userByName(username: String!): User
+  userMe: User
 }
 
 type Mutation {

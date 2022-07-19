@@ -36,6 +36,18 @@ const resolvers = {
         .select('-__v -password')
         .populate('comments');
     },
+
+    // the ME query
+    userMe: async (parent, args, context) => {
+      if(context.user) {
+      const userData = await User.findOne({ _id: context.user._id})
+      .select('-__v -password')
+      .populate('comments')
+      
+      return userData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
   },
 
   Mutation: {// passing the user object to signToken() functionso username, email, and _id properties are added to the token.
