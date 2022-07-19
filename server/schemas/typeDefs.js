@@ -38,12 +38,25 @@ type Mutation {
   userLogin(email: String!, password: String!): Auth
   userSignup(username: String!, email: String!, password: String!): Auth
 }
-
-
-
 `;
 
+// //example of code to use if a model squabble is implemented
+// //seeders file will have to be modified as well
+// // comment has to be modified to belong to a certain squabble by it's id
+// type Squabble {
+//   _id: ID
+//   squabbleTitle: String
+//   squabbleBook: String
+//   squabbleMovie: String
+//   squabbleDescription: String
+//   squableStatus: String
+//   squabbleCommentCount: Number
+// }
 
+// type Query {
+//   squabbleAll: [Squabble]
+//   squableById(_id: ID!): Squabble
+// }
 
 
 

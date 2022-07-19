@@ -48,6 +48,16 @@ const resolvers = {
       }
       throw new AuthenticationError("Not logged in");
     },
+    // //example of code to use if a model squabble is implemented
+    // squableAll: async (parent, { squableTitle }) => {
+    //   //params may or may not have a filter based on the title of the squable
+    //   const params = squableTitle ? { squableTitle } : {};
+    //   return Squabble.find(params).sort({ createdAt: -1 });
+    // },
+    // //example of code to use if a model squabble is implemented
+    // squabbleById: async (parent, { _id }) => {
+    //   return Squabble.findOne({ _id });
+    // },
   },
 
   Mutation: {// passing the user object to signToken() functionso username, email, and _id properties are added to the token.
