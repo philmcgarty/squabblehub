@@ -5,18 +5,19 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    //get filtered comments by movie/book preference (Int value:  Movie 1 - Book 2)
-    commentsByPreference: async (parent, { movieorbook }) => {
-      //params may or may not have a filter based on the movie/book preference. if no params, this will return ALL comments
-      const params = movieorbook ? { movieorbook } : {};
-      return Comment.find(params).sort({ createdAt: -1 });
-    },
-
     //get filtered comments by Username
-    commentsByUser: async (parent, { username }) => {
+    commentsAllOrByUser: async (parent, { username }) => {
       //params may or may not have a filter based on the username, if no params, this will return ALL comments
       const params = username ? { username } : {};
       return Comment.find(params).sort({ createdAt: -1 });
+    },
+
+    //get filtered comments by movie/book preference (Int value:  Movie 1 - Book 2)
+    commentsByPreference: async (parent, { movieorbook }) => {
+      //params may or may not have a filter based on the movie/book preference. if no params, this will return ALL comments
+      // const params = movieorbook ? { movieorbook } : {};
+      // return Comment.find(params).sort({ createdAt: -1 });
+            return Comment.find({ movieorbook }).sort({ createdAt: -1 });
     },
 
     // get single comment by ID

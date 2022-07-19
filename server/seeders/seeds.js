@@ -65,7 +65,9 @@ db.once('open', async () => {
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
     const movieorbook = Math.round(Math.random(0.5)+1);
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+    const randomSquabbleIndex = Math.floor(Math.random() * createdSquabbles.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
+    const { _id: squabbleId } = createdSquabbles.ops[randomSquabbleIndex];
 
     const createdComment = await Comment.create({ commentText, username, movieorbook });
 
@@ -75,7 +77,7 @@ db.once('open', async () => {
     );
 
     const updatedSquabble = await Squabble.updateOne(
-      { _id: userId },
+      { _id: squabbleId },
       { $push: { squabbleComments: createdComment._id } }
     );
 

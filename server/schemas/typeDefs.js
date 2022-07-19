@@ -37,7 +37,7 @@ type Auth {
 }
 
 type Query {
-  commentsByUser(username: String): [Comment]
+  commentsAllOrByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
   commentById(_id: ID!): Comment
 
