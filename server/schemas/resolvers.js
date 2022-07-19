@@ -1,4 +1,5 @@
 const {User, Comment } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
 
 
 const resolvers = {
@@ -37,13 +38,27 @@ const resolvers = {
   },
 
   Mutation: {
+    // adding a new user
     userSignup: async (parent, args) => {
       const user = await User.create(args);
       return user
+    },
+
+    //login in
+    userLogin: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if(!user) {
+        throw new AuthenticationError("Mmm please try again, we couldn't recognize you!")
+      }
+      const correctPw = await user.isCorrectPassword(password);
+
+      if(!correctPw){
+        throw new AuthenticationError("Mmm please try again, we couldn't recognize you!")
+      }
+      return user;
     }
   },
-
-
 };
 
 module.exports = resolvers
