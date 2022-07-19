@@ -28,6 +28,11 @@ type Query {
   userByName(username: String!): User
 }
 
+type Mutation {
+  userLogin(email: String!, password: String!): User
+  userSignup(username: String!, email: String!, password: String!): User
+}
+
 `;
 
 

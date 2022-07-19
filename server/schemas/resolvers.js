@@ -1,5 +1,6 @@
 const {User, Comment } = require('../models');
 
+
 const resolvers = {
   Query: {
     //get filtered comments by movie/book preference (Int value:  Movie 1 - Book 2)
@@ -33,7 +34,15 @@ const resolvers = {
         .select('-__v -password')
         .populate('comments');
     },
-  }
+  },
+
+  Mutation: {
+    userSignup: async (parent, args) => {
+      const user = await User.create(args);
+      return user
+    }
+  },
+
 
 };
 
