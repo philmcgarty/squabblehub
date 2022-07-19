@@ -1,11 +1,12 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Comment, User } = require('../models');
+const { Comment, User, Squabble } = require('../models');
 
 db.once('open', async () => {
   await Comment.deleteMany({});
   await User.deleteMany({});
+  await Squabble.deleteMany({})
 
   // create user data
   const userData = [];
@@ -20,7 +21,44 @@ db.once('open', async () => {
 
   const createdUsers = await User.collection.insertMany(userData);
 
+    // create Squabble Data
+    const squabbleData = [];
+
+    miscTitles = [
+      {
+      title: "Gone Girl",
+      movieYear: 2018,
+      movieDirector: "Alex garland",
+      bookYear: 2014,
+      bookAuthor: "Jeff VanderMeer"
+    },
+    {
+      title: "Annihilation",
+      movieYear: 214,
+      movieDirector: "David Fincher",
+      bookYear: 2012,
+      bookAuthor: "Gillian Flynn"
+    },
+  ]
+
+    for (let i = 0; i < 2; i += 1) {
+      const title = `${miscTitles[i].title}`;
+      const bookAuthor = `${miscTitles[i].bookAuthor}`;
+      const bookYear = `${miscTitles[i].bookYear}`;
+      const movieDirector = `${miscTitles[i].movieDirector}`;
+      const movieYear = `${miscTitles[i].movieYear}`;
+
+      squabbleData.push({       
+        title,
+        movieYear,
+        movieDirector,
+        bookYear,
+        bookAuthor});
+    }
   
+    const createdSquabbles = await Squabble.collection.insertMany(squabbleData);
+
+
   // create comments
   let createdComments = [];
   for (let i = 0; i < 100; i += 1) {
@@ -34,6 +72,11 @@ db.once('open', async () => {
     const updatedUser = await User.updateOne(
       { _id: userId },
       { $push: { comments: createdComment._id } }
+    );
+
+    const updatedSquabble = await Squabble.updateOne(
+      { _id: userId },
+      { $push: { squabbleComments: createdComment._id } }
     );
 
     createdComments.push(createdComments);

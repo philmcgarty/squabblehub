@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat')
+const Comment = require('../models/Comment')
 
 const squabbleSchema = new Schema(
   {
@@ -12,7 +13,23 @@ const squabbleSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    squabbleComments: [{
+    bookAuthor: {
+      type: String
+    },
+    bookYear: {
+      type: Number
+    },
+    movieDirector: {
+      type: String
+    },
+    movieYear: {
+      type: Number
+    },
+    winningParty: {
+      type: Number
+    },
+    squabbleComments: 
+    [{
       type: Schema.Types.ObjectId,
       ref: 'Comment'
     }]
