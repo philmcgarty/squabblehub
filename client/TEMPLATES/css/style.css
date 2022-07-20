@@ -1,0 +1,30 @@
+/* Global Styles */
+h2 {
+  font-family: Bowlby;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero {
+  background-image: url(../images/SquabbleHub-BG.jpg);
+  background-size: cover !important;
+  background-position: center !important;
+  height: 50vh;
+}
+
+#SH-Graphic {
+  max-height:  !important;
+}
+
+.the-book {
+  background-color: firebrick;
+  color: white ;
+}
+
+.the-movie {
+  background-color: mediumblue;
+  color: white;
+}
+/* End of Header Styles */
+
+/* Main Styles */
