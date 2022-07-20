@@ -37,6 +37,12 @@ type Auth {
   user: User
 }
 
+type Suggestion {
+  suggestionTitle: String
+  createdAt: String
+  username: [User]
+}
+
 type Query {
   commentsAllOrByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
