@@ -109,7 +109,6 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     
-    
     //Adding squabble to favSquabbles. Currently this mutation only adds the squable ID to the user model. room for improvement here
     squabbleAddFavourite: async (parent, { squabbleId }, context) => {
       if (context.user) {

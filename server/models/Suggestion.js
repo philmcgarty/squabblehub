@@ -12,11 +12,10 @@ const suggestionSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    username: 
-    [{
-      type: Schema.Types.ObjectId,
-      ref: 'User'
-    }]
+    username: {
+      type: String,
+      required: true
+    },
   },
   {
     toJSON: {

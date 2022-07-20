@@ -40,7 +40,7 @@ type Auth {
 type Suggestion {
   suggestionTitle: String
   createdAt: String
-  username: [User]
+  username: String
 }
 
 type Query {
@@ -52,9 +52,10 @@ type Query {
   userByName(username: String!): User
   userMe: User
 
-
   squabbleAll: [Squabble]
   squabbleById(_id: ID!): Squabble
+
+  suggestionAll: [Suggestion]
 }
 
 type Mutation {
@@ -62,6 +63,8 @@ type Mutation {
   userSignup(username: String!, email: String!, password: String!): Auth
 
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
+
+  suggestionAdd(suggestionTitle: String!): Suggestion
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
 }
