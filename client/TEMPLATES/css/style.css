@@ -5,6 +5,13 @@ h2 {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .hero {
   background-image: url(../images/SquabbleHub-BG.jpg);
   background-size: cover !important;
