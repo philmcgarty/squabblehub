@@ -3,11 +3,16 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-h2 {
+h2, h4 {
   font-family: 'Bowlby One SC', cursive;
   background-color: white;
 }
 
+h3 {
+  font-family: 'Bowlby One SC', cursive;
+  color: white;
+  background-color: black;
+}
 .content {
   display: flex;
   align-items: center;
