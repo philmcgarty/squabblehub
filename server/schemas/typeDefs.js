@@ -54,7 +54,7 @@ type Mutation {
   userLogin(email: String!, password: String!): Auth
   userSignup(username: String!, email: String!, password: String!): Auth
 
-  commentAdd(commentText: String!): Comment
+  commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
 
   squabbleFavourite(squabbleId: ID!): Squabble
 }

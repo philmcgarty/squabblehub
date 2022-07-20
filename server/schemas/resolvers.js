@@ -81,7 +81,29 @@ const resolvers = {
       }
       const token = signToken(user)
       return { token, user};
-    }
+    },
+
+    commentAdd: async (parent, args, context) => {
+      if (context.user) {
+        const newComment = await Comment.create({ ...args, username: context.user.username });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { comments: newComment._id } },
+          { new: true }
+          );
+
+
+        await Squabble.findOneAndUpdate(
+          { _id: args.squabbleId },
+          { $push: { squabbleComments: newComment }},
+          { new: true, runValidators: true }
+          );
+        return newComment;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 
