@@ -51,11 +51,11 @@ const resolvers = {
     },
     squabbleAll: async () => {
       return Squabble.find()
-        .populate('comments');
+        .populate('squabbleComments');
     },
     squabbleById: async (parent, { _id }) => {
       return Squabble.findOne({ _id })
-      .populate('comments');
+      .populate('squabbleComments');
     },
   },
 

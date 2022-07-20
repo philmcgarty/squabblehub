@@ -53,8 +53,14 @@ type Query {
 type Mutation {
   userLogin(email: String!, password: String!): Auth
   userSignup(username: String!, email: String!, password: String!): Auth
+
+  commentAdd(commentText: String!): Comment
+
+  squabbleFavourite(squabbleId: ID!): Squabble
 }
 `;
+
+//squabblefavourite is under consideration
 
 // export 
 module.exports = typeDefs

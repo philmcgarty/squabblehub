@@ -18,7 +18,7 @@ db.once('open', async () => {
 
     userData.push({ username, email, password });
   }
-
+  
   const createdUsers = await User.collection.insertMany(userData);
 
     // create Squabble Data
@@ -64,8 +64,10 @@ db.once('open', async () => {
   for (let i = 0; i < 100; i += 1) {
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
     const movieorbook = Math.round(Math.random(0.5)+1);
+
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const randomSquabbleIndex = Math.floor(Math.random() * createdSquabbles.ops.length);
+
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
     const { _id: squabbleId } = createdSquabbles.ops[randomSquabbleIndex];
 
@@ -80,6 +82,8 @@ db.once('open', async () => {
       { _id: squabbleId },
       { $push: { squabbleComments: createdComment._id } }
     );
+
+    console.log(updatedSquabble)
 
     createdComments.push(createdComments);
   }
