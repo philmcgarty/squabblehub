@@ -60,6 +60,12 @@ const resolvers = {
       return Squabble.findOne({ _id })
       .populate('squabbleComments');
     },
+
+    // query ALL suggestions, or include a parameter: Username
+    suggestionAllorByUser: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Suggestion.find(params).sort({ createdAt: -1 });
+    },
   },
 
   Mutation: {// passing the user object to signToken() function so username, email, and _id properties are added to the token.
@@ -106,6 +112,15 @@ const resolvers = {
         return newComment;
       }
 
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    //adding a suggestion
+    suggestionAdd: async (parent, args, context) => {
+      if (context.user) {
+        const newSuggestion = await Suggestion.create({ ...args, username: context.user.username })
+        return newSuggestion
+      }
       throw new AuthenticationError('You need to be logged in!');
     },
     

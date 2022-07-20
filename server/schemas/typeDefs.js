@@ -38,6 +38,7 @@ type Auth {
 }
 
 type Suggestion {
+  _id: ID
   suggestionTitle: String
   createdAt: String
   username: String
@@ -55,7 +56,7 @@ type Query {
   squabbleAll: [Squabble]
   squabbleById(_id: ID!): Squabble
 
-  suggestionAll: [Suggestion]
+  suggestionAllorByUser: [Suggestion]
 }
 
 type Mutation {
