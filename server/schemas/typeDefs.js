@@ -17,6 +17,7 @@ type User {
   email: String
   password: String
   comments: [Comment]
+  favSquabbles: [Squabble]
 }
 
 type Squabble {
@@ -56,7 +57,7 @@ type Mutation {
 
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
 
-  squabbleFavourite(squabbleId: ID!): Squabble
+  squabbleAddFavourite(squabbleId: ID!): Squabble
 }
 `;
 

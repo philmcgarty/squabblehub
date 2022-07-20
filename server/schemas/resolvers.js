@@ -29,13 +29,15 @@ const resolvers = {
     usersAll: async () => {
       return User.find()
         .select('-__v -password')
-        .populate('comments');
+        .populate('comments')
+        .populate('favSquabbles')
     },
     // get single user by username
     userByName: async (parent, { username }) => {
       return User.findOne({ username })
         .select('-__v -password')
-        .populate('comments');
+        .populate('comments')
+        .populate('favSquabbles')
     },
 
     // the ME query
@@ -104,6 +106,19 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    squabbleAddFavourite: async (parent, { squabbleId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { favSquabbles: squabbleId } },
+          { new: true }
+        ).populate('favSquabbles');
+
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
   },
 };
 
