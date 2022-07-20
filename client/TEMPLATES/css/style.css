@@ -1,8 +1,11 @@
 /* Global Styles */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 h2 {
-  font-family: Bowlby;
-  color: white;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-family: 'Bowlby One SC', cursive;
+  background-color: white;
 }
 
 .content {
@@ -23,6 +26,15 @@ h2 {
   max-height:  !important;
 }
 
+.card-title {
+  padding: 10px 0;
+}
+
+.card-img {
+  width: 12rem;
+  margin-top: 5px;
+}
+
 .the-book {
   background-color: firebrick;
   color: white ;
@@ -32,6 +44,9 @@ h2 {
   background-color: mediumblue;
   color: white;
 }
-/* End of Header Styles */
+
+
+
+
 
 /* Main Styles */
