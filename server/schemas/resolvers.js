@@ -1,4 +1,4 @@
-const {User, Comment, Squabble, Suggestion } = require('../models');
+const {User, Comment, Squabble, Suggestion, Polls } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
 
@@ -66,6 +66,10 @@ const resolvers = {
       const params = username ? { username } : {};
       return Suggestion.find(params).sort({ createdAt: -1 });
     },
+
+    polls: async () => {
+      return Polls.find()
+    }
   },
 
   Mutation: {// passing the user object to signToken() function so username, email, and _id properties are added to the token.

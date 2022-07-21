@@ -32,6 +32,16 @@ type Squabble {
   squabbleComments: [Comment]
 }
 
+type Polls {
+  _id: ID
+  question: String
+  options: [Options]
+}
+type Options{
+  optionName: String
+  votes: Int
+}
+
 type Auth {
   token: ID!
   user: User
@@ -57,6 +67,7 @@ type Query {
   squabbleById(_id: ID!): Squabble
 
   suggestionAllorByUser: [Suggestion]
+  polls: [Polls]
 }
 
 type Mutation {
