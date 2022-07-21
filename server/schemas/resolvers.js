@@ -80,6 +80,8 @@ const resolvers = {
       return { token, user };
     },
 
+
+
     //login in
     userLogin: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -140,7 +142,22 @@ const resolvers = {
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    vote: async (parent, { pollId, optionIndex }, context ) => {
+      // if (context.user) {
+        const key = "options."+ optionIndex + ".votes";
+        const updatedPoll = await Polls.findByIdAndUpdate(
+        { _id: pollId },
+        { $inc: { [key]: 1} },
+        { new: true }
+        )
+        return updatedPoll
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     }
+
+
   },
 };
 

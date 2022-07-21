@@ -79,6 +79,8 @@ type Mutation {
   suggestionAdd(suggestionTitle: String!): Suggestion
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
+
+  vote(pollId: String!, optionIndex: Int!): Polls
 }
 `;
 
