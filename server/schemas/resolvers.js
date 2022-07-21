@@ -66,7 +66,7 @@ const resolvers = {
       const params = username ? { username } : {};
       return Suggestion.find(params).sort({ createdAt: -1 });
     },
-
+    //Query all polls
     polls: async () => {
       return Polls.find()
     }
@@ -144,8 +144,9 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    // add vote
     vote: async (parent, { pollId, optionIndex }, context ) => {
-      // if (context.user) {
+      if (context.user) {
         const key = "options."+ optionIndex + ".votes";
         const updatedPoll = await Polls.findByIdAndUpdate(
         { _id: pollId },
@@ -153,8 +154,8 @@ const resolvers = {
         { new: true }
         )
         return updatedPoll
-      // }
-      // throw new AuthenticationError('You need to be logged in!');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     }
 
 
