@@ -1,4 +1,4 @@
-const {User, Comment, Squabble, Suggestion } = require('../models');
+const {User, Comment, Squabble, Suggestion, Polls } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
 
@@ -66,6 +66,10 @@ const resolvers = {
       const params = username ? { username } : {};
       return Suggestion.find(params).sort({ createdAt: -1 });
     },
+
+    polls: async () => {
+      return Polls.find()
+    }
   },
 
   Mutation: {// passing the user object to signToken() function so username, email, and _id properties are added to the token.
@@ -75,6 +79,8 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
+
 
     //login in
     userLogin: async (parent, { email, password }) => {
@@ -136,7 +142,22 @@ const resolvers = {
         return updatedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+
+    vote: async (parent, { pollId, optionIndex }, context ) => {
+      // if (context.user) {
+        const key = "options."+ optionIndex + ".votes";
+        const updatedPoll = await Polls.findByIdAndUpdate(
+        { _id: pollId },
+        { $inc: { [key]: 1} },
+        { new: true }
+        )
+        return updatedPoll
+      // }
+      // throw new AuthenticationError('You need to be logged in!');
     }
+
+
   },
 };
 

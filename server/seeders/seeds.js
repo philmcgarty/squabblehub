@@ -1,12 +1,13 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Comment, User, Squabble } = require('../models');
+const { Comment, User, Squabble, Polls } = require('../models');
 
 db.once('open', async () => {
   await Comment.deleteMany({});
   await User.deleteMany({});
   await Squabble.deleteMany({})
+  await Polls.deleteMany({})
 
   // create user data
   const userData = [];
@@ -87,6 +88,26 @@ db.once('open', async () => {
 
     createdComments.push(createdComments);
   }
+  
+  
+  const poll = {
+    question: "Help Pick Next Weeks Squabble",
+    options: [
+      {
+        optionName: "Dune",
+        votes: Math.round(Math.random() * 20)
+      },
+      {
+        optionName: "Ready Player One",
+        votes: Math.round(Math.random() * 20)
+      },
+      {
+        optionName: "The Adventures of Tom Bombadil",
+        votes: Math.round(Math.random() * 20)
+      }
+    ]
+   }     
+    const createdPoll = await Polls.collection.insertOne(poll);
 
   
 
