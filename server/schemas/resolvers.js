@@ -121,6 +121,16 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    
+    //deleting a comment
+    commentDelete: async (parent, { commentId }, context) => {
+      // if (context.user) {
+      await Comment.findOneAndDelete ({ _id: commentId })
+          return `your comment has been deleted`
+      // }
+    },
+    
+
     //adding a suggestion
     suggestionAdd: async (parent, args, context) => {
       if (context.user) {
@@ -129,7 +139,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
+
     //Adding squabble to favSquabbles. Currently this mutation only adds the squable ID to the user model. room for improvement here
     squabbleAddFavourite: async (parent, { squabbleId }, context) => {
       if (context.user) {

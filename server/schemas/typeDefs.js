@@ -75,6 +75,8 @@ type Mutation {
   userSignup(username: String!, email: String!, password: String!): Auth
 
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
+  commentDelete(commentId: ID!): String
+  commentEdit(comment: ID!): Comment
 
   suggestionAdd(suggestionTitle: String!): Suggestion
 
