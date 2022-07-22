@@ -124,10 +124,10 @@ const resolvers = {
     
     //deleting a comment
     commentDelete: async (parent, { commentId }, context) => {
-      // if (context.user) {
+      if (context.user) {
       await Comment.findOneAndDelete ({ _id: commentId })
           return `your comment has been deleted`
-      // }
+      }
     },
     
 
