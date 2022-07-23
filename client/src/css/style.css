@@ -27,7 +27,11 @@ h3 {
   height: 50vh;
 }
 
-.card-title {
+#SH-Graphic {
+  max-height:  !important;
+}
+
+.card-title, {
   padding: 10px 0;
 }
 
@@ -37,18 +41,15 @@ h3 {
 }
 
 .the-book {
-  background-color: #df4759;
+  background-color: firebrick;
   color: white ;
 }
 
 .the-movie {
-  background-color: #0d6efd;
+  background-color: mediumblue;
   color: white;
 }
 
-footer {
-  margin-top: 30px !important;
-}
 
 
 
