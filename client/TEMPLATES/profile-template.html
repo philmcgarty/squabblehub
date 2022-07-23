@@ -52,11 +52,15 @@
   <main>
 
     <!-- "Vote for next Squabble" section -->
-      <div class="container">
-        <h3 class="text-center">Vote for the next Squabble</h3>
+    <section>
+      <div class="container display-grid">
+        <!-- Total container -->
+        <div class="row justify-content-center mt-2" id="sqabble-choices">
 
-        <!-- Card container -->
-        <div class="row mt-5 content" id="sqabble-choices">
+          <h3 class="text-center">Vote for the next Squabble</h3>
+
+          <!-- Card container -->
+          <div class="row text-center mt-3">
 
             <!-- 1st Squabble choice -->
             <div class="col">
@@ -95,28 +99,36 @@
             </div>
 
           </div>
+          <!-- END of card container -->
+          </div>
+          <!-- END of total container -->
         </div>
     <!-- END of Vote for next section -->
+
         <div class="mt-5 content">
           <div class="card-body p-3 text-danger text-center">
             <p><strong>Voting ends at 9PM (EST) every Sunday.</strong></p>
           </div>
         </div>
-    
-    <!-- Bottom portion container -->
+    </section>
+
+    <!-- Bottom Section container -->
+  <section>
     <div class ="container display-grid mt-3">
       <div class="row">
     <!-- "Suggest a Squabble" section-->
         <div class="col">
           <h3 class="text-center">Suggest a Squabble</h3>
           <!-- Suggest a Squabble FORM -->
-          <div class="card shadow mt-3 p-2">
+          <div class="card shadow mt-3 p-4">
           
-          <div class="mb-3 text-center">
-            <label for="exampleFormControlTextarea1" class="form-label">Enter the book / movie title</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-
+            <div class="mb-3 text-center">
+              <label for="exampleFormControlTextarea1" class="form-label">Enter the book / movie title(s)</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="d-grid">
+              <button class="btn btn-primary" type="button" id="suggestion-submit">Submit your suggestion</button>
+            </div>
         </div>
         <!-- END of form -->
 
@@ -140,17 +152,11 @@
 
         </div>
     <!-- END of Your Squabble Suggestions -->
+
       </div>
-
     </div>
+  </section>
     
-
-    
-
-    
-
-      
-      
   </main>
 
   <!-- FOOTER -->
