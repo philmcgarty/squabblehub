@@ -23,7 +23,7 @@ const resolvers = {
     },
 
     //get filtered comments by movie and squabble id
-    commentsMovie: async (parent, { squabbleId, movieorbookId }) => {
+    commentsBySquabble: async (parent, { squabbleId, movieorbookId }) => {
       //params may or may not have a filter based on the username, if no params, this will return ALL comments
       return await Comment.find({ forSquabble: squabbleId, movieorbook: movieorbookId }).sort({ createdAt: -1 })
     },
