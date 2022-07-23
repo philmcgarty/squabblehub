@@ -51,6 +51,7 @@ query squabbleAll{
 export const QUERY_COMMENTS_SQUABBLE = gql`
 query commentsBySquabble ($squabbleId: String!, $movieorbookId: Int!) {
     commentsBySquabble(squabbleId: $squabbleId, movieorbookId: $movieorbookId ){
+        _id
         commentText
         username
         movieorbook
