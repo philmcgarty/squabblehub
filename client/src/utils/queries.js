@@ -11,6 +11,8 @@ query squabbleById($id: ID!){
     bookYear
     movieDirector
     movieYear
+    bookVotes
+    movieVotes
     squabbleComments{
       _id
       commentText
@@ -35,6 +37,8 @@ query squabbleAll{
     bookYear
     movieDirector
     movieYear
+    bookVotes
+    movieVotes
     squabbleComments{
       _id
       commentText
