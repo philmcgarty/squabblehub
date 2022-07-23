@@ -25,6 +25,12 @@ const squabbleSchema = new Schema(
     movieYear: {
       type: Number
     },
+    bookVotes: {
+      type: Number
+    },
+    movieVotes: {
+      type: Number
+    },
     winningParty: {
       type: Number
     },

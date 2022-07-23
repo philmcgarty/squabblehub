@@ -31,7 +31,10 @@ type Squabble {
   movieYear: Int
   winningParty: Int
   squabbleComments: [Comment]
+  bookVotes: Int
+  movieVotes: Int
 }
+
 
 type Polls {
   _id: ID
@@ -85,6 +88,9 @@ type Mutation {
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
 
+  movieVoteAdd(squabbleId: ID!): Squabble
+  bookVoteAdd(squabbleId: ID!): Squabble
+  
   vote(pollId: ID!, optionIndex: Int!): Polls
 }
 `;
