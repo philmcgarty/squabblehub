@@ -18,8 +18,14 @@ const resolvers = {
     },
 
     // get single comment by ID
-    commentById: async (parent, { _id }) => {
-      return Comment.findOne({ _id });
+    commentById: async (parent, { commentId }) => {
+      return Comment.findOne({ _id: commentId });
+    },
+
+    //get filtered comments by movie and squabble id
+    commentsBySquabble: async (parent, { squabbleId, movieorbookId }) => {
+      //params may or may not have a filter based on the username, if no params, this will return ALL comments
+      return await Comment.find({ forSquabble: squabbleId, movieorbook: movieorbookId }).sort({ createdAt: -1 })
     },
 
     // get all users
@@ -101,7 +107,7 @@ const resolvers = {
     // adding comments. Comment will be saved in the user model and the squabble model
     commentAdd: async (parent, args, context) => {
       if (context.user) {
-        const newComment = await Comment.create({ ...args, username: context.user.username });
+        const newComment = await Comment.create({ ...args, username: context.user.username, forSquabble: args.squabbleId });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -121,6 +127,20 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    
+    //deleting a comment
+    commentDelete: async (parent, { commentId }, context) => {
+     
+      if (context.user) {
+      await Comment.findOneAndDelete({ username: context.user.username, _id: commentId })
+          return `${context.user.username} deleted a comment`
+          Comment.dele
+
+      }
+      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+    },
+    
+
     //adding a suggestion
     suggestionAdd: async (parent, args, context) => {
       if (context.user) {
@@ -129,7 +149,7 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
+
     //Adding squabble to favSquabbles. Currently this mutation only adds the squable ID to the user model. room for improvement here
     squabbleAddFavourite: async (parent, { squabbleId }, context) => {
       if (context.user) {

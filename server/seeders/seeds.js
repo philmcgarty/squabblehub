@@ -72,7 +72,7 @@ db.once('open', async () => {
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
     const { _id: squabbleId } = createdSquabbles.ops[randomSquabbleIndex];
 
-    const createdComment = await Comment.create({ commentText, username, movieorbook });
+    const createdComment = await Comment.create({ commentText, username, movieorbook, forSquabble: squabbleId });
 
     const updatedUser = await User.updateOne(
       { _id: userId },

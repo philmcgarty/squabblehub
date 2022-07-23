@@ -22,6 +22,9 @@ const commentSchema = new Schema(
     movieorbook: {
       type: Number,
       required: true
+    },
+    forSquabble: {
+      type: String
     }
   },
   {
