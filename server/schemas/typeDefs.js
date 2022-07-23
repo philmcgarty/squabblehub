@@ -9,6 +9,7 @@ type Comment {
   createdAt: String
   username: String
   movieorbook: Int
+  forSquabble: String
 }
 
 type User {
@@ -57,7 +58,8 @@ type Suggestion {
 type Query {
   commentsAllOrByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
-  commentById(_id: ID!): Comment
+  commentById(commentId: ID!): Comment
+  commentsBySquabble(squabbleId: String!, movieorbookId: Int!): [Comment]
 
   usersAll: [User]
   userByName(username: String!): User
@@ -66,7 +68,7 @@ type Query {
   squabbleAll: [Squabble]
   squabbleById(_id: ID!): Squabble
 
-  suggestionAllorByUser: [Suggestion]
+  suggestionAllorByUser(username: String): [Suggestion]
   polls: [Polls]
 }
 
@@ -75,12 +77,14 @@ type Mutation {
   userSignup(username: String!, email: String!, password: String!): Auth
 
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
+  commentDelete(commentId: ID!): String
+  commentEdit(comment: ID!): Comment
 
   suggestionAdd(suggestionTitle: String!): Suggestion
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
 
-  vote(pollId: String!, optionIndex: Int!): Polls
+  vote(pollId: ID!, optionIndex: Int!): Polls
 }
 `;
 
