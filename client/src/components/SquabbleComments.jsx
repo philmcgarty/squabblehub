@@ -1,7 +1,35 @@
 import React from "react";
 import vsGraphic from '../images/vs-img.png';
+import CommentsList from "./CommentsList";
 
 const SquabbleComments = () => {
+    
+    const bookComments = [
+        {
+            id: '1',
+            quote: 'This book is awesome, Tom Bombadil is the best! More singing please!',
+            user: 'TolkienFiend'
+        },
+        {
+            id: '2',
+            quote: 'The movies were not long enough, they left way too much out. What happened to the forest and the most important character, Tom Bombadil?',
+            user: 'Bookreader666'
+        }
+    ]
+    
+    const movieComments = [
+        {
+            id: '3',
+            quote: 'You have to watch the extended cut, it is da Bombadil!',
+            user: 'ILoveMovies'
+        },
+        {
+            id: '4',
+            quote: 'No way I have time to read the books, movie all the way!',
+            user: 'B.Baggins'
+        }
+    ]
+    
     return (
         <section>
                 {/* <!-- MOVIE CHOICE = Cards for those who select movies --> */}
@@ -17,9 +45,13 @@ const SquabbleComments = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <!-- BOOK CHOICE = Cards for those who select movies --> */}
+
+                        {/* <!-- BOOK CHOICE = Cards for those who select books --> */}
                         <div className="col mt-3">
                             <h3 className="text-center the-book">The BOOK is better because...</h3>
+
+
+                            {/* THIS DIV TO BE REPLACED WITH <COMMENTSLIST BOOKS={BOOKCOMMENTS}/> */}
 
                             {/* <!-- BOOK comments container --> */}
                             <div className="card col" style={{width: "27rem"}} id="book-comments">
@@ -27,10 +59,9 @@ const SquabbleComments = () => {
 
                                     {/* <!-- Example comment --> */}
 
-
-
                                 </div>
                             </div>
+
 
                         </div>
                         {/* <!-- BOOK END-->  */}
@@ -40,9 +71,13 @@ const SquabbleComments = () => {
                             <img src={vsGraphic} className="img-fluid" />
                         </div>
 
-                        {/* <!--  MOVIE CHOICE = Cards for those who select books --> */}
+                        {/* <!--  MOVIE CHOICE = Cards for those who select movies --> */}
                         <div className="col mt-3">
                             <h3 className="text-center the-movie">The MOVIE is better because...</h3>
+
+
+                            <CommentsList comments={movieComments}/>
+                            {/* THIS DIV TO BE REPLACED WITH <COMMENTSLIST MOVIES={MOVIECOMMENTS}/> */}
 
                             {/* <!-- MOVIE comments container --> */}
                             <div className="card col" style={{width: "27rem"}} id="book-comments">
@@ -57,9 +92,10 @@ const SquabbleComments = () => {
                                             </blockquote>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
+
+
                         </div>
                         {/* <!-- MOVIE END--> */}
                     </div>
