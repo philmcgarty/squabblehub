@@ -27,11 +27,11 @@ h3 {
   height: 50vh;
 }
 
-#SH-Graphic {
+/* #SH-Graphic {
   max-height:  !important;
-}
+} */
 
-.card-title, {
+.card-title {
   padding: 10px 0;
 }
 
