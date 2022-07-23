@@ -53,7 +53,7 @@ mutation suggestionAdd ($suggestionTitle: String!) {
 `;
 
 export const VOTE = gql`
-    mutation vote($pollId: String!, $optionIndex: Int!) {
+    mutation vote($pollId: ID!, $optionIndex: Int!) {
         vote(pollId: $pollId, optionIndex: $optionIndex) {
             _id
             question
