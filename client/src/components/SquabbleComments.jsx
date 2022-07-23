@@ -40,8 +40,11 @@ const SquabbleComments = () => {
                         <div className="row" id="vote-count">
                             <div className="card mb-4 shadow-lg">
                                 <div className="card-body">
-                                    {/* PLACEHOLDER - NEEDS TO BE CHANGED */}
+
+                                    {/* BELOW IS PLACEHOLDER - NEEDS TO BE CHANGED */}
+                                    
                                     <p className="card-text text-center text-bg-primary">The MOVIE is winning with 1 vote</p>
+                                    
                                 </div>
                             </div>
                         </div>
