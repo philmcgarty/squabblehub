@@ -31,14 +31,18 @@ db.once('open', async () => {
       movieYear: 2018,
       movieDirector: "Alex garland",
       bookYear: 2014,
-      bookAuthor: "Jeff VanderMeer"
+      bookAuthor: "Jeff VanderMeer",
+      bookVotes: Math.round(Math.random() * 20),
+      movieVotes: Math.round(Math.random() * 20)
     },
     {
       title: "Annihilation",
       movieYear: 214,
       movieDirector: "David Fincher",
       bookYear: 2012,
-      bookAuthor: "Gillian Flynn"
+      bookAuthor: "Gillian Flynn",
+      bookVotes: Math.round(Math.random() * 20),
+      movieVotes: Math.round(Math.random() * 20)
     },
   ]
 
@@ -48,13 +52,18 @@ db.once('open', async () => {
       const bookYear = `${miscTitles[i].bookYear}`;
       const movieDirector = `${miscTitles[i].movieDirector}`;
       const movieYear = `${miscTitles[i].movieYear}`;
+      const bookVotes = `${miscTitles[i].bookVotes}`;
+      const movieVotes = `${miscTitles[i].movieVotes}`;
 
       squabbleData.push({       
         title,
         movieYear,
         movieDirector,
         bookYear,
-        bookAuthor});
+        bookAuthor,
+        bookVotes,
+        movieVotes
+      });
     }
   
     const createdSquabbles = await Squabble.collection.insertMany(squabbleData);

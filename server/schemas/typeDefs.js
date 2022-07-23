@@ -31,7 +31,10 @@ type Squabble {
   movieYear: Int
   winningParty: Int
   squabbleComments: [Comment]
+  bookVotes: Int
+  movieVotes: Int
 }
+
 
 type Polls {
   _id: ID

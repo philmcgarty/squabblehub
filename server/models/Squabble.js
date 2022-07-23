@@ -32,7 +32,13 @@ const squabbleSchema = new Schema(
     [{
       type: Schema.Types.ObjectId,
       ref: 'Comment'
-    }]
+    }],
+    bookVotes: {
+      type: Number
+    },
+    movieVotes: {
+      type: Number
+    }
   },
   {
     toJSON: {
