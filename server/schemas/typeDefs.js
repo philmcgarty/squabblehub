@@ -87,6 +87,9 @@ type Mutation {
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
 
+  movieVoteAdd(squabbleId: ID!): Squabble
+  bookVoteAdd(squabbleId: ID!): Squabble
+  
   vote(pollId: ID!, optionIndex: Int!): Polls
 }
 `;

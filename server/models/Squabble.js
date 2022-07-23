@@ -25,6 +25,12 @@ const squabbleSchema = new Schema(
     movieYear: {
       type: Number
     },
+    bookVotes: {
+      type: Number
+    },
+    movieVotes: {
+      type: Number
+    },
     winningParty: {
       type: Number
     },
@@ -32,13 +38,7 @@ const squabbleSchema = new Schema(
     [{
       type: Schema.Types.ObjectId,
       ref: 'Comment'
-    }],
-    bookVotes: {
-      type: Number
-    },
-    movieVotes: {
-      type: Number
-    }
+    }]
   },
   {
     toJSON: {

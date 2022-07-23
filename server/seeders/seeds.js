@@ -27,7 +27,7 @@ db.once('open', async () => {
 
     miscTitles = [
       {
-      title: "The lord of The Rings: Fellowship Of The",
+      title: "The lord of The Rings: Fellowship Of The Ring",
       movieYear: 2005,
       movieDirector: "Peter Jackson",
       bookYear: 1976,
@@ -41,8 +41,7 @@ db.once('open', async () => {
       movieDirector: "David Fincher",
       bookYear: 2012,
       bookAuthor: "Gillian Flynn",
-      bookVotes: Math.round(Math.random() * 20),
-      movieVotes: Math.round(Math.random() * 20)
+      
     },
   ]
 
@@ -52,8 +51,8 @@ db.once('open', async () => {
       const bookYear = `${miscTitles[i].bookYear}`;
       const movieDirector = `${miscTitles[i].movieDirector}`;
       const movieYear = `${miscTitles[i].movieYear}`;
-      const bookVotes = `${miscTitles[i].bookVotes}`;
-      const movieVotes = `${miscTitles[i].movieVotes}`;
+      const bookVotes = Math.round(Math.random() * 20);
+      const movieVotes = Math.round(Math.random() * 20);
 
       squabbleData.push({       
         title,
