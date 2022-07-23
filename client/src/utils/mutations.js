@@ -42,6 +42,17 @@ mutation commentDelete($commentId: ID!) {
   }
 `;
 
+export const COMMENT_EDIT = gql`
+mutation commentEdit($commentId: ID!, $commentNewText: String!){
+    commentEdit(commentId: $commentId, commentNewText: $commentNewText) {
+      _id
+      commentText
+      movieorbook
+      createdAt
+    }
+  }
+`;
+
 export const SUGGESTION_ADD = gql`
 mutation suggestionAdd ($suggestionTitle: String!) {
     suggestionAdd(suggestionTitle: $suggestionTitle) {

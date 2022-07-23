@@ -78,7 +78,7 @@ type Mutation {
 
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
   commentDelete(commentId: ID!): String
-  commentEdit(comment: ID!): Comment
+  commentEdit(commentId: ID!, commentNewText: String!): Comment
 
   suggestionAdd(suggestionTitle: String!): Suggestion
 

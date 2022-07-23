@@ -27,11 +27,11 @@ db.once('open', async () => {
 
     miscTitles = [
       {
-      title: "Gone Girl",
-      movieYear: 2018,
-      movieDirector: "Alex garland",
-      bookYear: 2014,
-      bookAuthor: "Jeff VanderMeer"
+      title: "The lord of The Rings: Fellowship Of The",
+      movieYear: 2005,
+      movieDirector: "Peter Jackson",
+      bookYear: 1976,
+      bookAuthor: "J. R. R. Tolkien"
     },
     {
       title: "Annihilation",
