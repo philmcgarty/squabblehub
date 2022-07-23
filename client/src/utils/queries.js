@@ -89,19 +89,18 @@ query commentById ($commentId: ID!) {
 }
 `;
 
-
+// retreive the votes from next week squabbles
 export const QUERY_POLLS = gql`
-    {
-        polls {
-            _id
-            question
-            options {
-                optionName
-                votes
-            }
-        }
- 
+query polls{
+    polls {
+      _id
+      question
+      options {
+        optionName
+        votes
+      }
     }
+  }
 `;
 
 // query that returns the data of the user that is logged in only
