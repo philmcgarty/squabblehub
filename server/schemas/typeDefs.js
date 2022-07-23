@@ -84,7 +84,7 @@ type Mutation {
 
   squabbleAddFavourite(squabbleId: ID!): Squabble
 
-  vote(pollId: String!, optionIndex: Int!): Polls
+  vote(pollId: ID!, optionIndex: Int!): Polls
 }
 `;
 
