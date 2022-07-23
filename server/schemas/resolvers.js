@@ -121,6 +121,29 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+
+    
+    //deleting a comment
+    commentDelete: async (parent, { commentId }, context) => {
+      if (context.user) {
+      await Comment.findOneAndDelete({  _id: commentId, username: context.user.username} )
+          return `${context.user.username} deleted a comment`
+      }
+      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+    },
+    
+
+    commentEdit: async (parent, { commentId, commentNewText }, context) => {
+      if (context.user) {
+      const updatedComment = await Comment.findOneAndUpdate({_id: commentId},
+      { $set:{commentText: commentNewText}},
+      { new: true, runValidators: true })
+          return updatedComment
+      }
+      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+    },
+
+
     //adding a suggestion
     suggestionAdd: async (parent, args, context) => {
       if (context.user) {
