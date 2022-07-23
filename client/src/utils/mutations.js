@@ -63,15 +63,35 @@ mutation suggestionAdd ($suggestionTitle: String!) {
     }
 `;
 
-export const VOTE = gql`
-    mutation vote($pollId: ID!, $optionIndex: Int!) {
-        vote(pollId: $pollId, optionIndex: $optionIndex) {
-            _id
-            question
-            options {
-                optionName
-                votes
-            }
-        }
+export const ADD_BOOKVOTE = gql`
+  mutation bookVoteAdd($squabbleId: ID!) {
+    bookVoteAdd(squabbleId: $squabbleId) {
+      _id
+      title
+      bookVotes
     }
+  }
+`;
+
+export const ADD_MOVIEVOTE = gql`
+  mutation MovieVoteAdd($squabbleId: ID!) {
+    movieVoteAdd(squabbleId: $squabbleId) {
+      _id
+      title
+      movieVotes
+    }
+  }
+`;
+
+export const VOTE = gql`
+mutation vote($pollId: ID!, $optionIndex: Int!){
+    vote(pollId: $pollId, optionIndex: $optionIndex) {
+      _id
+      question
+      options {
+        optionName
+        votes
+      }
+    }
+  }
 `;

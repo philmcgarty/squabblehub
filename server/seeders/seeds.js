@@ -49,13 +49,18 @@ db.once('open', async () => {
   //     const bookYear = `${miscTitles[i].bookYear}`;
   //     const movieDirector = `${miscTitles[i].movieDirector}`;
   //     const movieYear = `${miscTitles[i].movieYear}`;
+  const bookVotes = Math.round(Math.random() * 20);
+  const movieVotes = Math.round(Math.random() * 20);
 
       squabbleData.push({       
         title: "The Lord of The Rings",
         movieYear: 2004,
         movieDirector: "Peter Jackson",
         bookYear: 1979,
-        bookAuthor: "JRR Tolkien"});
+        bookAuthor: "JRR Tolkien",
+        bookVotes,
+        movieVotes
+      });
     // }
   
     const createdSquabbles = await Squabble.collection.insertMany(squabbleData);

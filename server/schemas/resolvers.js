@@ -177,6 +177,29 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    bookVoteAdd: async (parent, { squabbleId }, context) => {
+      if (context.user) {
+      const updateBookVote = await Squabble.findByIdAndUpdate(
+        {_id: squabbleId},
+        { $inc: { bookVotes: 1} },
+        { new: true }
+        )
+        return updateBookVote
+      }
+      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+    },
+
+    movieVoteAdd: async (parent, { squabbleId }, context) => {
+      if (context.user) {
+      const updateMovieVote = await Squabble.findByIdAndUpdate(
+        {_id: squabbleId},
+        { $inc: { movieVotes: 1} },
+        { new: true }
+        )
+        return updateMovieVote
+      }
+      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+    },
     // add vote
     vote: async (parent, { pollId, optionIndex }, context ) => {
       if (context.user) {
