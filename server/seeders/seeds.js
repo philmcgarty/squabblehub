@@ -27,7 +27,7 @@ db.once('open', async () => {
 
     miscTitles = [
       {
-      title: "The lord of The Rings: Fellowship Of The",
+      title: "THe Lord Of The Rings",
       movieYear: 2005,
       movieDirector: "Peter Jackson",
       bookYear: 1976,
