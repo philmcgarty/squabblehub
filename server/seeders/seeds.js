@@ -1,18 +1,19 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Comment, User, Squabble, Polls } = require('../models');
+const { Comment, User, Squabble, Polls, Suggestion } = require('../models');
 
 db.once('open', async () => {
   await Comment.deleteMany({});
   await User.deleteMany({});
   await Squabble.deleteMany({})
   await Polls.deleteMany({})
+  await Suggestion.deleteMany({})
 
-  // create user data
+  //////////// create USER data
   const userData = [];
 
-  for (let i = 0; i < 50; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = faker.internet.password();
@@ -22,47 +23,47 @@ db.once('open', async () => {
   
   const createdUsers = await User.collection.insertMany(userData);
 
-    // create Squabble Data
-    const squabbleData = [];
+  //////////// create SQUABBLE Data
+  const squabbleData = [];
 
-    miscTitles = [
-      {
-      title: "THe Lord Of The Rings",
-      movieYear: 2005,
-      movieDirector: "Peter Jackson",
-      bookYear: 1976,
-      bookAuthor: "J. R. R. Tolkien"
-    },
-    {
-      title: "Annihilation",
-      movieYear: 214,
-      movieDirector: "David Fincher",
-      bookYear: 2012,
-      bookAuthor: "Gillian Flynn"
-    },
-  ]
+  //   miscTitles = [
+  //     {
+  //     title: "THe Lord Of The Rings",
+  //     movieYear: 2005,
+  //     movieDirector: "Peter Jackson",
+  //     bookYear: 1976,
+  //     bookAuthor: "J. R. R. Tolkien"
+  //   },
+  //   {
+  //     title: "Annihilation",
+  //     movieYear: 214,
+  //     movieDirector: "David Fincher",
+  //     bookYear: 2012,
+  //     bookAuthor: "Gillian Flynn"
+  //   },
+  // ]
 
-    for (let i = 0; i < 2; i += 1) {
-      const title = `${miscTitles[i].title}`;
-      const bookAuthor = `${miscTitles[i].bookAuthor}`;
-      const bookYear = `${miscTitles[i].bookYear}`;
-      const movieDirector = `${miscTitles[i].movieDirector}`;
-      const movieYear = `${miscTitles[i].movieYear}`;
+  //   for (let i = 0; i < 2; i += 1) {
+  //     const title = `${miscTitles[i].title}`;
+  //     const bookAuthor = `${miscTitles[i].bookAuthor}`;
+  //     const bookYear = `${miscTitles[i].bookYear}`;
+  //     const movieDirector = `${miscTitles[i].movieDirector}`;
+  //     const movieYear = `${miscTitles[i].movieYear}`;
 
       squabbleData.push({       
-        title,
-        movieYear,
-        movieDirector,
-        bookYear,
-        bookAuthor});
-    }
+        title: "The Lord of The Rings",
+        movieYear: 2004,
+        movieDirector: "Peter Jackson",
+        bookYear: 1979,
+        bookAuthor: "JRR Tolkien"});
+    // }
   
     const createdSquabbles = await Squabble.collection.insertMany(squabbleData);
 
 
-  // create comments
+  //////////// create COMMENTS data
   let createdComments = [];
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const commentText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
     const movieorbook = Math.round(Math.random(0.5)+1);
 
@@ -83,8 +84,6 @@ db.once('open', async () => {
       { _id: squabbleId },
       { $push: { squabbleComments: createdComment._id } }
     );
-
-    console.log(updatedSquabble)
 
     createdComments.push(createdComments);
   }
