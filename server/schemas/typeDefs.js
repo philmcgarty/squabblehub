@@ -62,7 +62,8 @@ type Query {
   commentsAllOrByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
   commentById(commentId: ID!): Comment
-  commentsBySquabble(squabbleId: String!, movieorbookId: Int!): [Comment]
+  commentsByMovie(squabbleId: String!, movieorbookId: Int): [Comment]
+  commentsByBook(squabbleId: String!, movieorbookId: Int): [Comment]
 
   usersAll: [User]
   userByName(username: String!): User

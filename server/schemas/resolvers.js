@@ -22,6 +22,16 @@ const resolvers = {
       return Comment.findOne({ _id });
     },
 
+    commentsByMovie: async (parent, { squabbleId }) => {
+      //params may or may not have a filter based on the username, if no params, this will return ALL comments
+      return await Comment.find({ forSquabble: squabbleId, movieorbook:1 }).sort({ createdAt: -1 })
+    },
+
+    commentsByBook: async (parent, { squabbleId }) => {
+      //params may or may not have a filter based on the username, if no params, this will return ALL comments
+      return await Comment.find({ forSquabble: squabbleId, movieorbook:2 }).sort({ createdAt: -1 })
+    },
+
     // get all users
     usersAll: async () => {
       return User.find()

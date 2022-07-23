@@ -47,18 +47,27 @@ query squabbleAll{
   }
 `;
 
-// comments for a specific squabble, can be filtered by movie/book preference by passing an Int value of 1 or 2
-export const QUERY_COMMENTS_SQUABBLE = gql`
-query commentsBySquabble ($squabbleId: String!, $movieorbookId: Int!) {
-    commentsBySquabble(squabbleId: $squabbleId, movieorbookId: $movieorbookId ){
-        _id
-        commentText
-        username
-        movieorbook
-        forSquabble
-        createdAt
+// ALL comments for a specific squabble, in pro of Movies 
+export const QUERY_COMMENTS_SQUABBLE_MOVIES = gql`
+query   commentsByMovie($squabbleId: String!){
+    commentsByMovie(squabbleId: $squabbleId) {
+      commentText
+      movieorbook
     }
-}
+  }
+`;
+
+// ALL comments for a specific squabble, in pro of Books 
+export const QUERY_COMMENTS_SQUABBLE_BOOKS = gql`
+query   commentsByBook($squabbleId: String!){
+    commentsByBook(squabbleId: $squabbleId) {
+      _id
+      commentText
+      username
+      createdAt
+      movieorbook
+    }
+  }
 `;
 
 

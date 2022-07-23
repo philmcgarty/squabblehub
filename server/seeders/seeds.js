@@ -27,13 +27,12 @@ db.once('open', async () => {
 
     miscTitles = [
       {
+
       title: "The lord of The Rings: Fellowship Of The Ring",
       movieYear: 2005,
       movieDirector: "Peter Jackson",
       bookYear: 1976,
       bookAuthor: "J. R. R. Tolkien",
-      bookVotes: Math.round(Math.random() * 20),
-      movieVotes: Math.round(Math.random() * 20)
     },
     {
       title: "Annihilation",
@@ -41,7 +40,6 @@ db.once('open', async () => {
       movieDirector: "David Fincher",
       bookYear: 2012,
       bookAuthor: "Gillian Flynn",
-      
     },
   ]
 
