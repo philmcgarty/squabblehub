@@ -18,8 +18,8 @@ const resolvers = {
     },
 
     // get single comment by ID
-    commentById: async (parent, { _id }) => {
-      return Comment.findOne({ _id });
+    commentById: async (parent, { commentId }) => {
+      return Comment.findOne({ _id: commentId });
     },
 
     //get filtered comments by movie and squabble id

@@ -58,7 +58,7 @@ type Suggestion {
 type Query {
   commentsAllOrByUser(username: String): [Comment]
   commentsByPreference(movieorbook: Int): [Comment]
-  commentById(_id: ID!): Comment
+  commentById(commentId: ID!): Comment
   commentsBySquabble(squabbleId: String!, movieorbookId: Int!): [Comment]
 
   usersAll: [User]
