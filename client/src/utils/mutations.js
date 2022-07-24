@@ -24,6 +24,33 @@ mutation userSignup ($username: String!, $password: String!, $email: String!){
   }
 `;
 
+//(NO VARIABLE NEEDED) adds a comment to the only squabble in db - in pro of movies
+export const COMMENT_ADD_CURRENT_MOVIE = gql`
+mutation commentAddCurrentMovie($commentText: String!) {
+  commentAddCurrentMovie(commentText: $commentText) {
+    _id
+    commentText
+    movieorbook
+    forSquabble
+    createdAt
+  }
+}
+`;
+
+//(NO VARIABLE NEEDED) adds a comment to the only squabble in db - in pro of books
+export const COMMENT_ADD_CURRENT_BOOK = gql`
+mutation commentAddCurrentBook ($commentText: String!) {
+  commentAddCurrentBook(commentText: $commentText) {
+    _id
+    commentText
+    movieorbook
+    forSquabble
+    createdAt
+  }
+}
+`;
+
+
 export const COMMENT_ADD = gql`
 mutation commentAdd($commentText: String!, $movieorbook: Int!, $squabbleId: ID!){
     commentAdd(commentText: $commentText, movieorbook: $movieorbook, squabbleId: $squabbleId) {

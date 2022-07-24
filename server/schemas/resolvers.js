@@ -32,6 +32,18 @@ const resolvers = {
       return await Comment.find({ forSquabble: squabbleId, movieorbook:2 }).sort({ createdAt: -1 })
     },
 
+    //no variable needed
+    commentsByCurrentMovie: async (parent, args) => {
+      //params may or may not have a filter based on the username, if no params, this will return ALL comments
+      return await Comment.find({ movieorbook:1 }).sort({ createdAt: -1 })
+    },
+
+    //no variable needed
+    commentsByCurrentBook: async (parent, args) => {
+      //params may or may not have a filter based on the username, if no params, this will return ALL comments
+      return await Comment.find({ movieorbook:2 }).sort({ createdAt: -1 })
+    },
+
     // get all users
     usersAll: async () => {
       return User.find()
@@ -70,6 +82,12 @@ const resolvers = {
     // query for squabble by it's ID
     squabbleById: async (parent, { _id }) => {
       return Squabble.findOne({ _id })
+      .populate('squabbleComments');
+    },
+
+    // query for squabble by it's Name (Hardcoded balue LOTR corresponds to the seeding file)
+    squabbleName: async (parent, { title }) => {
+      return Squabble.findOne({ title })
       .populate('squabbleComments');
     },
 
@@ -125,6 +143,60 @@ const resolvers = {
 
         await Squabble.findOneAndUpdate(
           { _id: args.squabbleId },
+          { $push: { squabbleComments: newComment }},
+          { new: true, runValidators: true }
+          );
+        return newComment;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // no variable needed to comment on the single squabble in the DB
+    commentAddCurrentMovie: async (parent, args, context) => {
+      if (context.user) {
+        const newComment = await Comment.create({ 
+          ...args, username: context.user.username, 
+          movieorbook: 1,
+          forSquabble: "The Lord of The Rings: The Followship Of The Ring"
+      });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { comments: newComment._id } },
+          { new: true }
+          );
+
+
+        await Squabble.findOneAndUpdate(
+          { title: "The Lord of The Rings: The Followship Of The Ring" },
+          { $push: { squabbleComments: newComment }},
+          { new: true, runValidators: true }
+          );
+        return newComment;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    // no variable needed to comment on the single squabble in the DB
+    commentAddCurrentBook: async (parent, args, context) => {
+      if (context.user) {
+        const newComment = await Comment.create({ 
+          ...args, username: context.user.username, 
+          movieorbook: 2,
+          forSquabble: "The Lord of The Rings: The Followship Of The Ring"
+      });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { comments: newComment._id } },
+          { new: true }
+          );
+
+
+        await Squabble.findOneAndUpdate(
+          { title: "The Lord of The Rings: The Followship Of The Ring" },
           { $push: { squabbleComments: newComment }},
           { new: true, runValidators: true }
           );

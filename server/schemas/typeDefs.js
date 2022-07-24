@@ -71,12 +71,15 @@ type Query {
   commentById(commentId: ID!): Comment
   commentsByMovie(squabbleId: String!, movieorbookId: Int): [Comment]
   commentsByBook(squabbleId: String!, movieorbookId: Int): [Comment]
+  commentsByCurrentMovie(movieorbookId: Int): [Comment]
+  commentsByCurrentBook(movieorbookId: Int): [Comment]
 
   usersAll: [User]
   userByName(username: String!): User
   userMe: User
 
   squabbleAll: [Squabble]
+  squabbleName (title: String!): Squabble
   squabbleById(_id: ID!): Squabble
 
   suggestionAllorByUser(username: String): [Suggestion]
@@ -91,6 +94,8 @@ type Mutation {
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
   commentDelete(commentId: ID!): String
   commentEdit(commentId: ID!, commentNewText: String!): Comment
+  commentAddCurrentMovie(commentText: String!): Comment
+  commentAddCurrentBook(commentText: String!): Comment
 
   suggestionAdd(suggestionTitle: String!): Suggestion
 
