@@ -6,12 +6,14 @@ body {
 h2, h4 {
   font-family: 'Bowlby One SC', cursive;
   background-color: white;
+  padding: 10px 0 10px 0;
 }
 
 h3 {
   font-family: 'Bowlby One SC', cursive;
   color: white;
   background-color: black;
+  padding: 10px 0 10px 0;
 }
 .content {
   display: flex;
