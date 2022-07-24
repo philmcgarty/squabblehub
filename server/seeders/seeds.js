@@ -49,20 +49,30 @@ db.once('open', async () => {
   //     const bookYear = `${miscTitles[i].bookYear}`;
   //     const movieDirector = `${miscTitles[i].movieDirector}`;
   //     const movieYear = `${miscTitles[i].movieYear}`;
-  const bookVotes = Math.round(Math.random() * 20);
-  const movieVotes = Math.round(Math.random() * 20);
-
-      squabbleData.push({       
-        title: "The Lord of The Rings",
-        movieYear: 2004,
-        movieDirector: "Peter Jackson",
-        bookYear: 1979,
-        bookAuthor: "JRR Tolkien",
-        bookVotes,
-        movieVotes
-      });
+  // const bookVotes = Math.round(Math.random() * 20);
+  // const movieVotes = Math.round(Math.random() * 20);
     // }
-  
+    let randomUser = (max) => Math.floor(Math.random() * max);
+    // const { _id: userId } = createdUsers.ops[randomUserIndex];
+    const { _id: id1 } = createdUsers.ops[randomUser(10)];
+    const { _id: id2 } = createdUsers.ops[randomUser(9)];
+    const { _id: id3 } = createdUsers.ops[randomUser(8)];
+    const { _id: id4 } = createdUsers.ops[randomUser(7)];
+    const { _id: id5 } = createdUsers.ops[randomUser(6)];
+    const { _id: id6 } = createdUsers.ops[randomUser(7)];
+    const { _id: id7 } = createdUsers.ops[randomUser(8)];
+    const { _id: id8 } = createdUsers.ops[randomUser(9)];
+    
+          squabbleData.push({       
+            title: "The Lord of The Rings: The Followship Of The Ring",
+            movieYear: 2004,
+            movieDirector: "Peter Jackson",
+            bookYear: 1979,
+            bookAuthor: "JRR Tolkien",
+            bookVotes: [id1, id2, id3, id4, id5, id6],
+            movieVotes: [id7, id8],
+          });
+
     const createdSquabbles = await Squabble.collection.insertMany(squabbleData);
 
 
@@ -127,7 +137,7 @@ const { _id: userId8 } = createdUsers.ops[randomUserIndex(9)];
     //     votes: Math.round(Math.random() * 20)
     //   }
     // ]
-    question: "Help Pick Next Weeks Squabble",
+    question: "Help Pick Next Week's Squabble",
     oneVoters: [userId1, userId2, userId3, userId4],
     twoVoters: [userId5, userId6],
     threeVoters: [userId7, userId8],

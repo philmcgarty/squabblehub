@@ -24,15 +24,19 @@ type User {
 type Squabble {
   _id: ID
   title: String
+  winner: String
   createdAt: String
   bookAuthor: String
   bookYear: Int
   movieDirector: String
   movieYear: Int
   winningParty: Int
+  commentCount: Int
   squabbleComments: [Comment]
-  bookVotes: Int
-  movieVotes: Int
+  bookVotes: [User]
+  movieVotes: [User]
+  bookVoteCount: Int
+  movieVoteCount: Int
 }
 
 type Polls {
@@ -68,12 +72,15 @@ type Query {
   commentById(commentId: ID!): Comment
   commentsByMovie(squabbleId: String!, movieorbookId: Int): [Comment]
   commentsByBook(squabbleId: String!, movieorbookId: Int): [Comment]
+  commentsByCurrentMovie(movieorbookId: Int): [Comment]
+  commentsByCurrentBook(movieorbookId: Int): [Comment]
 
   usersAll: [User]
   userByName(username: String!): User
   userMe: User
 
   squabbleAll: [Squabble]
+  squabbleName (title: String!): Squabble
   squabbleById(_id: ID!): Squabble
 
   suggestionAllorByUser(username: String): [Suggestion]
@@ -88,6 +95,8 @@ type Mutation {
   commentAdd(commentText: String!, movieorbook: Int!, squabbleId: ID! ): Comment
   commentDelete(commentId: ID!): String
   commentEdit(commentId: ID!, commentNewText: String!): Comment
+  commentAddCurrentMovie(commentText: String!): Comment
+  commentAddCurrentBook(commentText: String!): Comment
 
   suggestionAdd(suggestionTitle: String!): Suggestion
 
@@ -95,8 +104,13 @@ type Mutation {
 
   movieVoteAdd(squabbleId: ID!): Squabble
   bookVoteAdd(squabbleId: ID!): Squabble
+  voteCurrentMovie: Squabble
+  voteCurrentBook: Squabble
   
-  vote(pollId: ID!, indexId: Int!): Polls
+  voteNext(pollId: ID!, indexId: Int!): Polls
+  voteNextOptOne: Polls
+  voteNextOptTwo: Polls
+  voteNextOptThree: Polls
 }
 `;
 
@@ -104,23 +118,6 @@ type Mutation {
 
 // export 
 module.exports = typeDefs
-
-
-
-
-//CODE FROM A PREVIOUS ITERATION OF POLLS
-// type Polls {
-//   _id: ID
-//   question: String
-//   options: [Options]
-// }
-// type Options{
-//   optionName: String
-//   votes: Int
-// }
-
-
-
 
 
 

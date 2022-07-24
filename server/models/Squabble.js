@@ -25,15 +25,14 @@ const squabbleSchema = new Schema(
     movieYear: {
       type: Number
     },
-    bookVotes: {
-      type: Number
-    },
-    movieVotes: {
-      type: Number
-    },
-    winningParty: {
-      type: Number
-    },
+    bookVotes:     [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    movieVotes:     [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     squabbleComments: 
     [{
       type: Schema.Types.ObjectId,
@@ -42,13 +41,37 @@ const squabbleSchema = new Schema(
   },
   {
     toJSON: {
-      getters: true
+      getters: true,
+      virtuals: true
     }
   }
 );
 
 squabbleSchema.virtual('commentCount').get(function() {
   return this.squabbleComments.length;
+});
+
+squabbleSchema.virtual('movieVoteCount').get(function() {
+  return this.movieVotes.length;
+});
+
+squabbleSchema.virtual('bookVoteCount').get(function() {
+  return this.bookVotes.length;
+});
+
+squabbleSchema.virtual('winner').get(function() {
+  const mv = parseInt(this.movieVotes.length);
+  const bv = parseInt(this.bookVotes.length);
+  const winner = function() {
+    if(mv > bv){
+      return `The movie is the current winner with ${mv} knockout votes!`
+    } else if (mv === bv){
+      return `We currently have a tie. Let's keep voting!`
+    } else
+    {return `The book is the current winner with ${bv} knockout votes!`}
+  }
+
+  return winner;
 });
 
 const Squabble = model('Squabble', squabbleSchema);
