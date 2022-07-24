@@ -6,33 +6,33 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
 
 
-// const httpLink = createHttpLink({
-//   uri: '/graphql',
-// });
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql',
+});
 
-// const authLink = setContext((_, { headers }) => {
-//   const token = localStorage.getItem('id_token');
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
-// });
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
-// const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
-//   cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
 
 
 function App() {
   return (
-    // <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
       <Router>
         <div>
           <Header />
@@ -46,7 +46,7 @@ function App() {
 
               <Route
                 path="/login"
-                element={<Login />}
+                element={<LoginSignup />}
               />
         
               <Route path="/profile">
@@ -63,7 +63,7 @@ function App() {
           <Footer />
         </div>
       </Router>
-    // </ApolloProvider>
+    </ApolloProvider>
   );
 }
 
