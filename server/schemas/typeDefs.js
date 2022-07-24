@@ -96,7 +96,7 @@ type Mutation {
   movieVoteAdd(squabbleId: ID!): Squabble
   bookVoteAdd(squabbleId: ID!): Squabble
   
-  vote(pollId: ID!, indexId: Int!): String
+  vote(pollId: ID!, indexId: Int!): Polls
 }
 `;
 

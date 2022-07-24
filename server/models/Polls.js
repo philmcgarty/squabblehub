@@ -7,20 +7,20 @@ const pollSchema = new Schema({
     oneVoters: [
             {
               type: Schema.Types.ObjectId,
-              ref: 'Comment'
+              ref: 'User'
             }
           ],
 
     twoVoters: [
             {
               type: Schema.Types.ObjectId,
-              ref: 'Comment'
+              ref: 'User'
             }
           ],
     threeVoters:  [
             {
               type: Schema.Types.ObjectId,
-              ref: 'Comment'
+              ref: 'User'
             }
           ],
     oneTitle: {

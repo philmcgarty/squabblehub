@@ -93,7 +93,24 @@ db.once('open', async () => {
     createdComments.push(createdComments);
   }
   
-  
+//////////// create POLL data
+voters = []
+// for (let i = 0; i < 10; i += 1) {
+// let randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
+let randomUserIndex = (max) => Math.floor(Math.random() * max);
+// const { _id: userId } = createdUsers.ops[randomUserIndex];
+const { _id: userId1 } = createdUsers.ops[randomUserIndex(10)];
+const { _id: userId2 } = createdUsers.ops[randomUserIndex(9)];
+const { _id: userId3 } = createdUsers.ops[randomUserIndex(8)];
+const { _id: userId4 } = createdUsers.ops[randomUserIndex(7)];
+const { _id: userId5 } = createdUsers.ops[randomUserIndex(6)];
+const { _id: userId6 } = createdUsers.ops[randomUserIndex(7)];
+const { _id: userId7 } = createdUsers.ops[randomUserIndex(8)];
+const { _id: userId8 } = createdUsers.ops[randomUserIndex(9)];
+// console.log(userId)
+// voters.push({userId})
+// }
+// console.log(voters)
   const poll = {
     // question: "Help Pick Next Weeks Squabble",
     // options: [
@@ -111,14 +128,15 @@ db.once('open', async () => {
     //   }
     // ]
     question: "Help Pick Next Weeks Squabble",
+    oneVoters: [userId1, userId2, userId3, userId4],
+    twoVoters: [userId5, userId6],
+    threeVoters: [userId7, userId8],
     oneTitle: "Anihilation",
     twoTitle: "Forest Gump",
     threeTitle: "Life of Pi"
     
    }     
     const createdPoll = await Polls.collection.insertOne(poll);
-
-  
 
   console.log('all done!');
   process.exit(0);

@@ -79,6 +79,9 @@ const resolvers = {
     //Query all polls
     polls: async () => {
       return Polls.find()
+      .populate('oneVoters')
+      .populate('twoVoters')
+      .populate('threeVoters');
     }
   },
 
@@ -233,7 +236,8 @@ const resolvers = {
         .populate('oneVoters')
         .populate('twoVoters')
         .populate('threeVoters');
-        return "thank you for voting!"
+        // return "thank you for voting!"
+        return updatedPoll
       }
       throw new AuthenticationError('You need to be logged in!');
     }
