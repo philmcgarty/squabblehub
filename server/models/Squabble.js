@@ -25,12 +25,14 @@ const squabbleSchema = new Schema(
     movieYear: {
       type: Number
     },
-    bookVotes: {
-      type: Number
-    },
-    movieVotes: {
-      type: Number
-    },
+    bookVotes:     [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
+    movieVotes:     [{
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }],
     winningParty: {
       type: Number
     },
@@ -42,13 +44,22 @@ const squabbleSchema = new Schema(
   },
   {
     toJSON: {
-      getters: true
+      getters: true,
+      virtuals: true
     }
   }
 );
 
 squabbleSchema.virtual('commentCount').get(function() {
   return this.squabbleComments.length;
+});
+
+squabbleSchema.virtual('movieVoteCount').get(function() {
+  return this.movieVotes.length;
+});
+
+squabbleSchema.virtual('bookVoteCount').get(function() {
+  return this.bookVotes.length;
 });
 
 const Squabble = model('Squabble', squabbleSchema);

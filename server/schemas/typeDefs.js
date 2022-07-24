@@ -30,9 +30,12 @@ type Squabble {
   movieDirector: String
   movieYear: Int
   winningParty: Int
+  commentCount: Int
   squabbleComments: [Comment]
-  bookVotes: Int
-  movieVotes: Int
+  bookVotes: [User]
+  movieVotes: [User]
+  bookVoteCount: Int
+  movieVoteCount: Int
 }
 
 type Polls {

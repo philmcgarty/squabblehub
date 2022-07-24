@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7d0e73b2.css",
+    "main.js": "/static/js/main.86703533.js",
+    "static/js/787.0fcdea01.chunk.js": "/static/js/787.0fcdea01.chunk.js",
+    "static/media/LOTR-movie-resized.jpg": "/static/media/LOTR-movie-resized.cb73efed7a3aa1767797.jpg",
+    "static/media/SquabbleHub-BG.jpg": "/static/media/SquabbleHub-BG.148ad4e1be4b47574968.jpg",
+    "static/media/300vs-thumbnail.jpg": "/static/media/300vs-thumbnail.e917e50207936c564f3d.jpg",
+    "static/media/Annihilation-thumbnail.jpg": "/static/media/Annihilation-thumbnail.91c3f727ee7e549d7037.jpg",
+    "static/media/Forrest-Gump-vs-Thumbnail.jpg": "/static/media/Forrest-Gump-vs-Thumbnail.6809faed6b2df945456b.jpg",
+    "static/media/LOTR_Book.webp": "/static/media/LOTR_Book.92f7a77ac8be2fbe8ed5.webp",
+    "static/media/SquabbleHub-graphic-logo-v1.png": "/static/media/SquabbleHub-graphic-logo-v1.fcdb00055eecec2cf67d.png",
+    "index.html": "/index.html",
+    "main.7d0e73b2.css.map": "/static/css/main.7d0e73b2.css.map",
+    "main.86703533.js.map": "/static/js/main.86703533.js.map",
+    "787.0fcdea01.chunk.js.map": "/static/js/787.0fcdea01.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7d0e73b2.css",
+    "static/js/main.86703533.js"
+  ]
+}

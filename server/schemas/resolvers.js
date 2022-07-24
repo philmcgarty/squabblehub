@@ -62,7 +62,9 @@ const resolvers = {
     // query for ALL squabbles
     squabbleAll: async () => {
       return Squabble.find()
-        .populate('squabbleComments');
+        .populate('squabbleComments')
+        .populate('bookVotes')
+        .populate('movieVotes')
     },
 
     // query for squabble by it's ID
@@ -92,8 +94,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-
-
 
     //login in
     userLogin: async (parent, { email, password }) => {
@@ -184,9 +184,12 @@ const resolvers = {
       if (context.user) {
       const updateBookVote = await Squabble.findByIdAndUpdate(
         {_id: squabbleId},
-        { $inc: { bookVotes: 1} },
+        { $addToSet: { bookVotes: context.user._id}, $pull: { movieVotes: context.user._id}  },
         { new: true }
         )
+        .populate('bookVotes')
+        .populate('movieVotes')
+
         return updateBookVote
       }
       throw new AuthenticationError("Please log in first.");
@@ -196,27 +199,17 @@ const resolvers = {
       if (context.user) {
       const updateMovieVote = await Squabble.findByIdAndUpdate(
         {_id: squabbleId},
-        { $inc: { movieVotes: 1} },
+        { $addToSet: { movieVotes: context.user._id}, $pull: { bookVotes: context.user._id}  },
         { new: true }
         )
+        .populate('bookVotes')
+        .populate('movieVotes')
         return updateMovieVote
       }
       throw new AuthenticationError("Please log in first.");
     },
-    // add vote
-    //code form a previous iteration of vote
-    // vote: async (parent, { pollId, optionIndex }, context ) => {
-    //   if (context.user) {
-    //     const key = "options."+ optionIndex + ".votes";
-    //     const updatedPoll = await Polls.findByIdAndUpdate(
-    //     { _id: pollId },
-    //     { $inc: { [key]: 1} },
-    //     { new: true }
-    //     )
-    //     return updatedPoll
-    //   }
-    //   throw new AuthenticationError('You need to be logged in!');
-    // }
+
+    
     vote: async (parent, { pollId, indexId }, context ) => {
       if (context.user) {
         // const key = "options."+ optionIndex + ".votes";
