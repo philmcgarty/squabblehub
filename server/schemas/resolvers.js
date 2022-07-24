@@ -201,15 +201,39 @@ const resolvers = {
       throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
     },
     // add vote
-    vote: async (parent, { pollId, optionIndex }, context ) => {
+    //code form a previous iteration of vote
+    // vote: async (parent, { pollId, optionIndex }, context ) => {
+    //   if (context.user) {
+    //     const key = "options."+ optionIndex + ".votes";
+    //     const updatedPoll = await Polls.findByIdAndUpdate(
+    //     { _id: pollId },
+    //     { $inc: { [key]: 1} },
+    //     { new: true }
+    //     )
+    //     return updatedPoll
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // }
+    vote: async (parent, { pollId, indexId }, context ) => {
       if (context.user) {
-        const key = "options."+ optionIndex + ".votes";
+        // const key = "options."+ optionIndex + ".votes";
+        const key = () => {
+        if (indexId === 0){
+          return 'oneVoters'
+        } else if ( indexId === 1 ){
+          return 'twoVoters'
+        } else return 'threeVoters'
+      }
+
         const updatedPoll = await Polls.findByIdAndUpdate(
         { _id: pollId },
-        { $inc: { [key]: 1} },
+        { $addToSet: { [key()]: context.user._id } },
         { new: true }
-        )
-        return updatedPoll
+        )       
+        .populate('oneVoters')
+        .populate('twoVoters')
+        .populate('threeVoters');
+        return "thank you for voting!"
       }
       throw new AuthenticationError('You need to be logged in!');
     }

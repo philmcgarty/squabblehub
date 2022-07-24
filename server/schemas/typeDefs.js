@@ -35,16 +35,20 @@ type Squabble {
   movieVotes: Int
 }
 
-
 type Polls {
   _id: ID
   question: String
-  options: [Options]
+  oneVoters: [User]
+  twoVoters: [User]
+  threeVoters: [User]
+  oneTitle: String
+  twoTitle: String
+  threeTitle: String
+  oneVoteCount: Int
+  twoVoteCount: Int
+  threeVoteCount: Int
 }
-type Options{
-  optionName: String
-  votes: Int
-}
+
 
 type Auth {
   token: ID!
@@ -73,6 +77,7 @@ type Query {
   squabbleById(_id: ID!): Squabble
 
   suggestionAllorByUser(username: String): [Suggestion]
+  
   polls: [Polls]
 }
 
@@ -91,7 +96,7 @@ type Mutation {
   movieVoteAdd(squabbleId: ID!): Squabble
   bookVoteAdd(squabbleId: ID!): Squabble
   
-  vote(pollId: ID!, optionIndex: Int!): Polls
+  vote(pollId: ID!, indexId: Int!): String
 }
 `;
 
@@ -99,3 +104,24 @@ type Mutation {
 
 // export 
 module.exports = typeDefs
+
+
+
+
+//CODE FROM A PREVIOUS ITERATION OF POLLS
+// type Polls {
+//   _id: ID
+//   question: String
+//   options: [Options]
+// }
+// type Options{
+//   optionName: String
+//   votes: Int
+// }
+
+
+
+
+
+
+

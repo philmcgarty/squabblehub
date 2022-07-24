@@ -95,21 +95,26 @@ db.once('open', async () => {
   
   
   const poll = {
+    // question: "Help Pick Next Weeks Squabble",
+    // options: [
+    //   {
+    //     optionName: "Dune",
+    //     votes: Math.round(Math.random() * 20)
+    //   },
+    //   {
+    //     optionName: "Ready Player One",
+    //     votes: Math.round(Math.random() * 20)
+    //   },
+    //   {
+    //     optionName: "The Adventures of Tom Bombadil",
+    //     votes: Math.round(Math.random() * 20)
+    //   }
+    // ]
     question: "Help Pick Next Weeks Squabble",
-    options: [
-      {
-        optionName: "Dune",
-        votes: Math.round(Math.random() * 20)
-      },
-      {
-        optionName: "Ready Player One",
-        votes: Math.round(Math.random() * 20)
-      },
-      {
-        optionName: "The Adventures of Tom Bombadil",
-        votes: Math.round(Math.random() * 20)
-      }
-    ]
+    oneTitle: "Anihilation",
+    twoTitle: "Forest Gump",
+    threeTitle: "Life of Pi"
+    
    }     
     const createdPoll = await Polls.collection.insertOne(poll);
 
