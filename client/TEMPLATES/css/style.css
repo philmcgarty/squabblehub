@@ -1,0 +1,58 @@
+/* Global Styles */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h2, h4 {
+  font-family: 'Bowlby One SC', cursive;
+  background-color: white;
+}
+
+h3 {
+  font-family: 'Bowlby One SC', cursive;
+  color: white;
+  background-color: black;
+}
+.content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero {
+  background-image: url(../images/SquabbleHub-BG.jpg);
+  background-size: cover !important;
+  background-position: center !important;
+  height: 40% !important;
+}
+
+
+
+.card-title {
+  padding: 10px 0;
+}
+
+.card-img {
+  width: 12rem;
+  margin-top: 5px;
+}
+
+.the-book {
+  background-color: #df4759;
+  color: white ;
+}
+
+.the-movie {
+  background-color: #0d6efd;
+  color: white;
+}
+
+footer {
+  margin-top: 30px !important;
+}
+
+
+
+
+/* Main Styles */
