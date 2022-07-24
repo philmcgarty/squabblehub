@@ -51,16 +51,6 @@ mutation commentAddCurrentBook ($commentText: String!) {
 `;
 
 
-export const COMMENT_ADD = gql`
-mutation commentAdd($commentText: String!, $movieorbook: Int!, $squabbleId: ID!){
-    commentAdd(commentText: $commentText, movieorbook: $movieorbook, squabbleId: $squabbleId) {
-      _id
-      commentText
-      username
-      forSquabble
-    }
-  }
-`;
 
 export const COMMENT_DELETE = gql`
 mutation commentDelete($commentId: ID!) {
@@ -114,7 +104,7 @@ mutation voteCurrentBook{
 }
 `;
 
-// (NO VARIABBLE NEEDED) voting system for voting for next weekl's squabble (option1, option2 or option3)
+// (NO VARIABBLE NEEDED) voting system for voting for next weekl's squabble (option1)
 export const NEXT_VOTE_ONE = gql`
 mutation voteNextOptOne{
   voteNextOptOne {
@@ -127,6 +117,7 @@ mutation voteNextOptOne{
   }
 }
 `;
+// (NO VARIABBLE NEEDED) voting system for voting for next weekl's squabble (option2)
 export const NEXT_VOTE_TWO = gql`
 mutation voteNextOptTwo{
   voteNextOptTwo {
@@ -139,6 +130,7 @@ mutation voteNextOptTwo{
   }
 }
 `;
+// (NO VARIABBLE NEEDED) voting system for voting for next weekl's squabble (option3)
 export const NEXT_VOTE_THREE = gql`
 mutation voteNextOptThree{
   voteNextOptThree {
@@ -150,6 +142,9 @@ mutation voteNextOptThree{
     threeVoteCount
   }
 }`;
+
+
+//*****************DEPRECATED MUTATIONS, FUTURE DEVELOPMENT *************///
 
 // export const ADD_BOOKVOTE = gql`
 //   mutation bookVoteAdd($squabbleId: ID!) {
@@ -196,4 +191,16 @@ mutation voteNextOptThree{
 //     }
 //   }
   
+// `;
+
+
+// export const COMMENT_ADD = gql`
+// mutation commentAdd($commentText: String!, $movieorbook: Int!, $squabbleId: ID!){
+//     commentAdd(commentText: $commentText, movieorbook: $movieorbook, squabbleId: $squabbleId) {
+//       _id
+//       commentText
+//       username
+//       forSquabble
+//     }
+//   }
 // `;

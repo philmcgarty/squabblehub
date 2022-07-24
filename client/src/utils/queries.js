@@ -7,6 +7,7 @@ query  squabbleName {
   squabbleName(title: "The Lord of The Rings: The Followship Of The Ring") {
   _id
   title
+  winner
   createdAt
   bookAuthor
   bookYear
@@ -41,6 +42,7 @@ export const QUERY_SQUABBLE_ALL = gql`
 query squabbleAll{
     squabbleAll {
       _id
+      winner
       title
       createdAt
       bookAuthor
@@ -179,6 +181,7 @@ query squabbleById($id: ID!){
     squabbleById(_id: $id) {
       _id
       title
+      winner
       createdAt
       bookAuthor
       bookYear
