@@ -104,10 +104,23 @@ export const QUERY_POLLS = gql`
 query polls{
     polls {
       _id
-      question
-      options {
-        optionName
-        votes
+      oneTitle
+      oneVoteCount
+      oneVoters {
+      _id
+      username
+      }
+      twoTitle
+      twoVoteCount
+      twoVoters {
+        _id
+        username
+      }
+      threeTitle
+      threeVoteCount
+      threeVoters {
+        _id
+        username
       }
     }
   }

@@ -84,14 +84,28 @@ export const ADD_MOVIEVOTE = gql`
 `;
 
 export const VOTE = gql`
-mutation vote($pollId: ID!, $optionIndex: Int!){
-    vote(pollId: $pollId, optionIndex: $optionIndex) {
+mutation vote($pollId: ID!, $indexId: Int!){
+    vote(pollId: $pollId, indexId: $indexId) {
       _id
-      question
-      options {
-        optionName
-        votes
+      oneTitle
+      oneVoteCount
+      oneVoters {
+      _id
+      username
+      }
+      twoTitle
+      twoVoteCount
+      twoVoters {
+        _id
+        username
+      }
+      threeTitle
+      threeVoteCount
+      threeVoters {
+        _id
+        username
       }
     }
   }
+  
 `;
