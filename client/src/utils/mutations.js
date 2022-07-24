@@ -114,6 +114,43 @@ mutation voteCurrentBook{
 }
 `;
 
+// (NO VARIABBLE NEEDED) voting system for voting for next weekl's squabble (option1, option2 or option3)
+export const NEXT_VOTE_ONE = gql`
+mutation voteNextOptOne{
+  voteNextOptOne {
+    oneTitle
+    oneVoteCount
+    twoTitle
+    twoVoteCount
+    threeTitle
+    threeVoteCount
+  }
+}
+`;
+export const NEXT_VOTE_TWO = gql`
+mutation voteNextOptTwo{
+  voteNextOptTwo {
+    oneTitle
+    oneVoteCount
+    twoTitle
+    twoVoteCount
+    threeTitle
+    threeVoteCount
+  }
+}
+`;
+export const NEXT_VOTE_THREE = gql`
+mutation voteNextOptThree{
+  voteNextOptThree {
+    oneTitle
+    oneVoteCount
+    twoTitle
+    twoVoteCount
+    threeTitle
+    threeVoteCount
+  }
+}`;
+
 // export const ADD_BOOKVOTE = gql`
 //   mutation bookVoteAdd($squabbleId: ID!) {
 //     bookVoteAdd(squabbleId: $squabbleId) {
@@ -134,29 +171,29 @@ mutation voteCurrentBook{
 //   }
 // `;
 
-export const VOTE = gql`
-mutation vote($pollId: ID!, $indexId: Int!){
-    vote(pollId: $pollId, indexId: $indexId) {
-      _id
-      oneTitle
-      oneVoteCount
-      oneVoters {
-      _id
-      username
-      }
-      twoTitle
-      twoVoteCount
-      twoVoters {
-        _id
-        username
-      }
-      threeTitle
-      threeVoteCount
-      threeVoters {
-        _id
-        username
-      }
-    }
-  }
+// export const VOTE = gql`
+// mutation vote($pollId: ID!, $indexId: Int!){
+//     vote(pollId: $pollId, indexId: $indexId) {
+//       _id
+//       oneTitle
+//       oneVoteCount
+//       oneVoters {
+//       _id
+//       username
+//       }
+//       twoTitle
+//       twoVoteCount
+//       twoVoters {
+//         _id
+//         username
+//       }
+//       threeTitle
+//       threeVoteCount
+//       threeVoters {
+//         _id
+//         username
+//       }
+//     }
+//   }
   
-`;
+// `;

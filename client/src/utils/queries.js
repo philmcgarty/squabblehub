@@ -34,41 +34,9 @@ query  squabbleName {
   }
 }
 `;
-// returns a single squabble providind an ID variable
-export const QUERY_SQUABBLE_ID = gql`
-query squabbleById($id: ID!){
-    squabbleById(_id: $id) {
-      _id
-      title
-      createdAt
-      bookAuthor
-      bookYear
-      movieDirector
-      movieYear
-      bookVoteCount
-      bookVotes{
-        _id
-        username
-      }
-      movieVoteCount
-      movieVotes{
-        _id
-        username
-      }
-      commentCount
-      squabbleComments{
-        _id
-        commentText
-        createdAt
-        username
-        movieorbook
-        forSquabble
-        }
-    }
-  }
-`;
 
-// returns ALL the squabbles in db
+
+// (NO VARIABLE NEEDED) returns ALL the squabbles in db
 export const QUERY_SQUABBLE_ALL = gql`
 query squabbleAll{
     squabbleAll {
@@ -104,7 +72,6 @@ query squabbleAll{
 
 
 
-
 //*******COMMENT QUERIES**********************************************************//
 
 //(NO VARIABLE NEEDED) , returns the current commments in pro of movies
@@ -135,6 +102,110 @@ query commentsByCurrentBook{
 }
 `;
 
+
+
+
+//*******USER QUERIES**********************************************************//
+
+// (NO VARIABLE NEEDED..but needs the login token) returns the data of the user that is logged in only.
+export const QUERY_USER_ME = gql`
+query userMe {
+  userMe {
+    _id
+    username
+    email
+    comments {
+      commentText
+      movieorbook
+      createdAt
+      forSquabble
+    }
+  }
+}
+`;
+
+
+
+//*******POLL and SUGGESTION QUERIES**********************************************************//
+
+// (NO VARIABLE NEEDED)  retreives the inofrmation votes from NEXT WEEK SQUABBLE poll
+export const QUERY_POLLS = gql`
+query polls{
+  polls {
+    _id
+    question
+    oneTitle
+    oneVoteCount
+    oneVoters {
+    _id
+    username
+    }
+    twoTitle
+    twoVoteCount
+    twoVoters {
+      _id
+      username
+    }
+    threeTitle
+    threeVoteCount
+    threeVoters {
+      _id
+      username
+    }
+  }
+}
+`;
+
+// (NO VARIABLE NEEDED) query that retuns all the SUGGESTIONS posted by users. You can provide an optional parameter of a username but is not needed
+export const QUERY_SUGGESTIONS = gql`
+query suggestionAllorByUser($username: String){
+  suggestionAllorByUser(username:$username){
+    _id
+    suggestionTitle
+    username
+    createdAt
+  }
+}
+`;
+
+
+
+//******************************************************************************************************** */
+//*************************** */ QUERIES FOR FUTURE FUNCTIONALITY WITH VARIABLES*************************///
+
+// returns a single squabble providind an ID variable
+export const QUERY_SQUABBLE_ID = gql`
+query squabbleById($id: ID!){
+    squabbleById(_id: $id) {
+      _id
+      title
+      createdAt
+      bookAuthor
+      bookYear
+      movieDirector
+      movieYear
+      bookVoteCount
+      bookVotes{
+        _id
+        username
+      }
+      movieVoteCount
+      movieVotes{
+        _id
+        username
+      }
+      commentCount
+      squabbleComments{
+        _id
+        commentText
+        createdAt
+        username
+        movieorbook
+        forSquabble
+        }
+    }
+  }
+`;
 
 // ALL comments for a specific squabble (TAKES Squabble ID Varible and mobvioeorbook: variable), in pro of Movies 
 export const QUERY_COMMENTS_SQUABBLE_MOVIES = gql`
@@ -187,28 +258,6 @@ query commentById ($commentId: ID!) {
 }
 `;
 
-
-
-//*******USER QUERIES**********************************************************//
-
-// (NO VARIABLE NEEDED..but needs the login token) returns the data of the user that is logged in only.
-export const QUERY_USER_ME = gql`
-query userMe {
-  userMe {
-    username
-    email
-    comments {
-      commentText
-      movieorbook
-      createdAt
-      forSquabble
-    }
-  }
-}
-`;
-
-
-
 // query that returns a single user info. Takes a username as parameter
 export const QUERY_USER_NAME = gql`
 query userByname($username: String!){
@@ -221,48 +270,6 @@ query userByname($username: String!){
         createdAt
         forSquabble
       }
-    }
-  }
-`;
-
-
-
-//*******OTHER QUERIES**********************************************************//
-
-// (NO VARIABLE NEEDED)  retreives the inofrmation votes from NEXT WEEK SQUABBLE poll
-export const QUERY_POLLS = gql`
-query polls{
-  polls {
-    _id
-    oneTitle
-    oneVoteCount
-    oneVoters {
-    _id
-    username
-    }
-    twoTitle
-    twoVoteCount
-    twoVoters {
-      _id
-      username
-    }
-    threeTitle
-    threeVoteCount
-    threeVoters {
-      _id
-      username
-    }
-  }
-}
-`;
-
-// (NO VARIABLE NEEDED) query that retuns all the suggestions posted by users. You can provide an optional parameter of a username but is not needed
-export const QUERY_SUGGESTIONS = gql`
-query suggestionAllorByUser($username: String){
-    suggestionAllorByUser(username:$username){
-      suggestionTitle
-      username
-      _id
     }
   }
 `;

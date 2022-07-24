@@ -24,6 +24,7 @@ type User {
 type Squabble {
   _id: ID
   title: String
+  winner: String
   createdAt: String
   bookAuthor: String
   bookYear: Int
@@ -117,23 +118,6 @@ type Mutation {
 
 // export 
 module.exports = typeDefs
-
-
-
-
-//CODE FROM A PREVIOUS ITERATION OF POLLS
-// type Polls {
-//   _id: ID
-//   question: String
-//   options: [Options]
-// }
-// type Options{
-//   optionName: String
-//   votes: Int
-// }
-
-
-
 
 
 
