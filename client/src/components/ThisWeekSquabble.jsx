@@ -34,7 +34,7 @@ const ThisWeekSquabble = () => {
         
         {/* <!-- vs graphic --> */}
         <div className="col content">
-            <img src={vsGraphic} className="img-fluid" />
+            <img src={vsGraphic} className="img-fluid" alt="..."/>
         </div>
 
         {/* <!-- Movie card --> */}
