@@ -189,7 +189,7 @@ const resolvers = {
         )
         return updateBookVote
       }
-      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+      throw new AuthenticationError("Please log in first.");
     },
 
     movieVoteAdd: async (parent, { squabbleId }, context) => {
@@ -201,7 +201,7 @@ const resolvers = {
         )
         return updateMovieVote
       }
-      throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
+      throw new AuthenticationError("Please log in first.");
     },
     // add vote
     //code form a previous iteration of vote
