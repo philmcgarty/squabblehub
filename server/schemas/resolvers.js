@@ -205,8 +205,6 @@ const resolvers = {
 
       throw new AuthenticationError('You need to be logged in!');
     },
-
-
     
     //deleting a comment
     commentDelete: async (parent, { commentId }, context) => {
@@ -216,7 +214,6 @@ const resolvers = {
       }
       throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
     },
-    
 
     commentEdit: async (parent, { commentId, commentNewText }, context) => {
       if (context.user) {
@@ -227,7 +224,6 @@ const resolvers = {
       }
       throw new AuthenticationError("Please log in first, you can only delete a comment of yours.");
     },
-
 
     //adding a suggestion
     suggestionAdd: async (parent, args, context) => {
@@ -252,10 +248,24 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    bookVoteAdd: async (parent, { squabbleId }, context) => {
+    voteCurrentMovie: async (parent, args, context) => {
       if (context.user) {
-      const updateBookVote = await Squabble.findByIdAndUpdate(
-        {_id: squabbleId},
+      const updateMovieVote = await Squabble.findOneAndUpdate(
+        { title: "The Lord of The Rings: The Followship Of The Ring" },
+        { $addToSet: { movieVotes: context.user._id}, $pull: { bookVotes: context.user._id}  },
+        { new: true }
+        )
+        .populate('bookVotes')
+        .populate('movieVotes')
+        return updateMovieVote
+      }
+      throw new AuthenticationError("Please log in first.");
+    },
+
+    voteCurrentBook: async (parent, args, context) => {
+      if (context.user) {
+      const updateBookVote = await Squabble.findOneAndUpdate(
+        { title: "The Lord of The Rings: The Followship Of The Ring" },
         { $addToSet: { bookVotes: context.user._id}, $pull: { movieVotes: context.user._id}  },
         { new: true }
         )
@@ -281,21 +291,29 @@ const resolvers = {
       throw new AuthenticationError("Please log in first.");
     },
 
-    
-    vote: async (parent, { pollId, indexId }, context ) => {
+    bookVoteAdd: async (parent, { squabbleId }, context) => {
       if (context.user) {
-        // const key = "options."+ optionIndex + ".votes";
-        const key = () => {
-        if (indexId === 0){
-          return 'oneVoters'
-        } else if ( indexId === 1 ){
-          return 'twoVoters'
-        } else return 'threeVoters'
-      }
+      const updateBookVote = await Squabble.findByIdAndUpdate(
+        {_id: squabbleId},
+        { $addToSet: { bookVotes: context.user._id}, $pull: { movieVotes: context.user._id}  },
+        { new: true }
+        )
+        .populate('bookVotes')
+        .populate('movieVotes')
 
-        const updatedPoll = await Polls.findByIdAndUpdate(
-        { _id: pollId },
-        { $addToSet: { [key()]: context.user._id } },
+        return updateBookVote
+      }
+      throw new AuthenticationError("Please log in first.");
+    },
+
+    voteNextOptOne: async (parent, args, context ) => {
+      if (context.user) {
+        const updatedPoll = await Polls.findOneAndUpdate(
+        { question: "Help Pick Next Week's Squabble" },
+        { 
+              $pull: { twoVoters: context.user._id, threeVoters: context.user._id},
+              // $pull: { threeVoters: context.user._id},
+              $addToSet: { oneVoters: context.user._id},  },
         { new: true }
         )       
         .populate('oneVoters')
@@ -305,7 +323,70 @@ const resolvers = {
         return updatedPoll
       }
       throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+
+    voteNextOptTwo: async (parent, args, context ) => {
+      if (context.user) {
+        const updatedPoll = await Polls.findOneAndUpdate(
+        { question: "Help Pick Next Week's Squabble" },
+        { 
+        $pull: { oneVoters: context.user._id, threeVoters: context.user._id},
+        // $pull: { threeVoters: context.user._id}, 
+        $addToSet: { twoVoters: context.user._id},},
+        { new: true }
+        )       
+        .populate('oneVoters')
+        .populate('twoVoters')
+        .populate('threeVoters');
+        // return "thank you for voting!"
+        return updatedPoll
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    voteNextOptThree: async (parent, args, context ) => {
+      if (context.user) {
+        const updatedPoll = await Polls.findOneAndUpdate(
+        { question: "Help Pick Next Week's Squabble" },
+        { 
+              $pull: { oneVoters: context.user._id, twoVoters: context.user._id},
+              // $pull: { twoVoters: context.user._id},
+              $addToSet: { threeVoters: context.user._id},  },
+        { new: true }
+        )       
+        .populate('oneVoters')
+        .populate('twoVoters')
+        .populate('threeVoters');
+        // return "thank you for voting!"
+        return updatedPoll
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    
+    // voteNext: async (parent, { pollId, indexId }, context ) => {
+    //   if (context.user) {
+    //     // const key = "options."+ optionIndex + ".votes";
+    //     const key = () => {
+    //     if (indexId === 0){
+    //       return 'oneVoters'
+    //     } else if ( indexId === 1 ){
+    //       return 'twoVoters'
+    //     } else return 'threeVoters'
+    //   }
+
+    //     const updatedPoll = await Polls.findByIdAndUpdate(
+    //     { _id: pollId },
+    //     { $addToSet: { [key()]: context.user._id } },
+    //     { new: true }
+    //     )       
+    //     .populate('oneVoters')
+    //     .populate('twoVoters')
+    //     .populate('threeVoters');
+    //     // return "thank you for voting!"
+    //     return updatedPoll
+    //   }
+    //   throw new AuthenticationError('You need to be logged in!');
+    // }
   },
 };
 

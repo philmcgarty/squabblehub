@@ -103,8 +103,13 @@ type Mutation {
 
   movieVoteAdd(squabbleId: ID!): Squabble
   bookVoteAdd(squabbleId: ID!): Squabble
+  voteCurrentMovie: Squabble
+  voteCurrentBook: Squabble
   
-  vote(pollId: ID!, indexId: Int!): Polls
+  voteNext(pollId: ID!, indexId: Int!): Polls
+  voteNextOptOne: Polls
+  voteNextOptTwo: Polls
+  voteNextOptThree: Polls
 }
 `;
 

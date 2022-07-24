@@ -89,25 +89,50 @@ mutation suggestionAdd ($suggestionTitle: String!) {
     }
 `;
 
-export const ADD_BOOKVOTE = gql`
-  mutation bookVoteAdd($squabbleId: ID!) {
-    bookVoteAdd(squabbleId: $squabbleId) {
-      _id
-      title
-      bookVotes
-    }
+
+// (NO VARIABLE NEEDED) adds your vote to the Current MOVIE from this Squabble 
+export const ADD_VOTE_CURRENT_MOVIE = gql`
+mutation voteCurrentMovie{
+  voteCurrentMovie {
+    _id
+    title
+    movieVoteCount
+    bookVoteCount
   }
+}
 `;
 
-export const ADD_MOVIEVOTE = gql`
-  mutation MovieVoteAdd($squabbleId: ID!) {
-    movieVoteAdd(squabbleId: $squabbleId) {
-      _id
-      title
-      movieVotes
-    }
+// (NO VARIABLE NEEDED) adds your vote to the Current BOOK from this Squabble 
+export const ADD_VOTE_CURRENT_BOOK = gql`
+mutation voteCurrentBook{
+  voteCurrentBook {
+    _id
+    title
+    movieVoteCount
+    bookVoteCount
   }
+}
 `;
+
+// export const ADD_BOOKVOTE = gql`
+//   mutation bookVoteAdd($squabbleId: ID!) {
+//     bookVoteAdd(squabbleId: $squabbleId) {
+//       _id
+//       title
+//       bookVotes
+//     }
+//   }
+// `;
+
+// export const ADD_MOVIEVOTE = gql`
+//   mutation MovieVoteAdd($squabbleId: ID!) {
+//     movieVoteAdd(squabbleId: $squabbleId) {
+//       _id
+//       title
+//       movieVotes
+//     }
+//   }
+// `;
 
 export const VOTE = gql`
 mutation vote($pollId: ID!, $indexId: Int!){
