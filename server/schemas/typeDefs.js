@@ -19,6 +19,7 @@ type User {
   password: String
   comments: [Comment]
   favSquabbles: [Squabble]
+  suggestions: [Suggestion]
 }
 
 type Squabble {

@@ -6,6 +6,7 @@ const suggestionSchema = new Schema(
     suggestionTitle: {
       type: String,
       minlength: 1,
+      maxlength: 50
     },
     createdAt: {
       type: Date,

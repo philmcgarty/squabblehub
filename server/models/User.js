@@ -31,6 +31,12 @@ const userSchema = new Schema(
         type: Schema.Types.ObjectId,
         ref: 'Squabble'
       }
+    ],
+    suggestions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Suggestion'
+      }
     ]
   } 
 );
