@@ -141,9 +141,9 @@ const { _id: userId8 } = createdUsers.ops[randomUserIndex(9)];
     oneVoters: [userId1, userId2, userId3, userId4],
     twoVoters: [userId5, userId6],
     threeVoters: [userId7, userId8],
-    oneTitle: "Anihilation",
-    twoTitle: "Forest Gump",
-    threeTitle: "Life of Pi"
+    oneTitle: "300",
+    twoTitle: "Anihilation",
+    threeTitle: "Forest Gump"
     
    }     
     const createdPoll = await Polls.collection.insertOne(poll);

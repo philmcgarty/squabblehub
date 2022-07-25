@@ -1,20 +1,27 @@
 import React from "react";
+import { useQuery } from '@apollo/client';
+import { QUERY_SUGGESTIONS } from '../utils/queries';
 
 const SuggestionHistory = () => {
+    const {loading, data} = useQuery(QUERY_SUGGESTIONS);
+        console.log(data)
+        const suggestions = data?.suggestionAllorByUser || [];
+        console.log(suggestions);
     return (
         <div className="col">
             <h3 className="text-center">Your Squabble Suggestions</h3>
             {/* <!-- List of suggestions --> */}
+            
             <div className="card shadow mt-3 p-2 mb-5">
-                <ul className="list-group list-group-flush">
-                <li className="list-group-item">Dune</li>
-                <li className="list-group-item">V for Vendetta</li>
-                <li className="list-group-item">50 Shades of Grey</li>
-                <li className="list-group-item">Life of Pi</li>
-                <li className="list-group-item">Scott Pilgrim vs. the World</li>
-                <li className="list-group-item">Twilight</li>
-                </ul>
-            </div>
+                {loading ? (
+                <div>Loading</div>) : (
+                    <ul className="list-group list-group-flush">   
+                        {suggestions.map(suggestion => (
+                        <li key={suggestion._id} className="list-group-item">{suggestion.suggestionTitle}</li>
+                        ))}   
+                    </ul>
+                )}
+            </div>    
         </div>
     )
 };

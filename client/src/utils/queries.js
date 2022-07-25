@@ -122,6 +122,12 @@ query userMe {
       createdAt
       forSquabble
     }
+    suggestions {
+      _id
+      suggestionTitle
+      username
+      createdAt
+    }
   }
 }
 `;
@@ -165,7 +171,6 @@ query suggestionAllorByUser($username: String){
     _id
     suggestionTitle
     username
-    createdAt
   }
 }
 `;
@@ -272,7 +277,14 @@ query userByname($username: String!){
         movieorbook
         createdAt
         forSquabble
+        
       }
+      suggestions {
+      _id
+      suggestionTitle
+      username
+      createdAt
+    }
     }
   }
 `;

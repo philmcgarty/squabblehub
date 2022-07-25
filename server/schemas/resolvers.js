@@ -50,6 +50,7 @@ const resolvers = {
         .select('-__v -password')
         .populate('comments')
         .populate('favSquabbles')
+        .populate('suggestions')
     },
     // get single user by username
     userByName: async (parent, { username }) => {
@@ -57,6 +58,7 @@ const resolvers = {
         .select('-__v -password')
         .populate('comments')
         .populate('favSquabbles')
+        .populate('suggestions')
     },
 
     // the ME query for login users (useful for creating a profile page)
@@ -65,6 +67,7 @@ const resolvers = {
       const userData = await User.findOne({ _id: context.user._id})
       .select('-__v -password')
       .populate('comments')
+      .populate('suggestions')
       
       return userData;
       }
@@ -229,6 +232,12 @@ const resolvers = {
     suggestionAdd: async (parent, args, context) => {
       if (context.user) {
         const newSuggestion = await Suggestion.create({ ...args, username: context.user.username })
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { suggestions: newSuggestion._id } },
+          { new: true }
+          );
+        
         return newSuggestion
       }
       throw new AuthenticationError('You need to be logged in!');
