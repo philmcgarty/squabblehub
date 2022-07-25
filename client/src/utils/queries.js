@@ -171,7 +171,6 @@ query suggestionAllorByUser($username: String){
     _id
     suggestionTitle
     username
-    createdAt
   }
 }
 `;

@@ -21,20 +21,21 @@ const SuggestionForm = () => {
                 });
             } 
             catch (e) {
-                console.warn("First thought insertion by user!")
+                console.warn("First suggestion insertion by user!")
             }
         
             // update thought array's cache
-            const { suggestions } = cache.readQuery({ query: QUERY_SUGGESTIONS });
+            const { suggestionAllorByUser } = cache.readQuery({ query: QUERY_SUGGESTIONS });
+            console.log(suggestionAllorByUser)
             cache.writeQuery({
                 query: QUERY_SUGGESTIONS,
-                data: { suggestions: [suggestionAdd, ...suggestions] },
+                data: { suggestionAllorByUser: [suggestionAdd, ...suggestionAllorByUser] }
             });
         }
     });
 
     const handleChange = event => {
-        if (event.target.value.length <= 50) {
+        if (event.target.value.length <= 100) {
             setTitle(event.target.value);
             setCharacterCount(event.target.value.length);
         }
@@ -43,7 +44,7 @@ const SuggestionForm = () => {
         event.preventDefault();
         
         try {
-            // add thought to database
+            // add suggestion to database
             await suggestionAdd({
                 variables: { suggestionTitle }
             });
@@ -69,11 +70,12 @@ const SuggestionForm = () => {
                     className="form-control" 
                     id="exampleFormControlTextarea1" 
                     rows="3"
+                    value={suggestionTitle}
                     onChange={handleChange}
                     ></textarea>
-                    <p className={`m-0 ${characterCount === 50 || error ? 'text-error' : ''}`}>
-                        Character Count: {characterCount}/50
-                        {error && <span className="ml-2">Something went wrong...</span>}
+                    <p className={`m-0 ${characterCount === 100 || error ? 'text-error' : ''}`}>
+                        Character Count: {characterCount}/100
+                        {error && <span className="ml-2"> Something went wrong...</span>}
                     </p>
                 </div>
                 
