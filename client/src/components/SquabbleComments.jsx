@@ -1,9 +1,18 @@
 import React from "react";
+import { useQuery } from '@apollo/client';
 import vsGraphic from '../images/vs-img.png';
 import CommentsList from "./CommentsList";
+import { QUERY_SQUABBLE_ALL, QUERY_CURRENT_MOVIE_COMMENTS, QUERY_CURRENT_BOOK_COMMENTS } from "../utils/queries";
 
 const SquabbleComments = () => {
+    const {loading, data} = useQuery(QUERY_CURRENT_MOVIE_COMMENTS);
+    console.log(data);
+    const movieComments2 = data?.commentsByCurrentMovie;
     
+    const {loading: bookloading ,data: bookData} = useQuery(QUERY_CURRENT_BOOK_COMMENTS);
+    console.log(bookData);
+    const bookComments2 = bookData?.commentsByCurrentBook;
+
     const bookComments = [
         {
             id: '1',
@@ -53,7 +62,12 @@ const SquabbleComments = () => {
                         <div className="col mt-3">
                             <h3 className="text-center the-book">The BOOK is better because...</h3>
 
-                            <CommentsList comments={bookComments}/>
+                            {bookloading ? (
+                                <div>Loading</div>
+                            ) : (
+                               <CommentsList comments={bookComments2}/> 
+                            )
+                        }
                             
                         </div>
                         {/* <!-- BOOK END-->  */}
@@ -67,8 +81,13 @@ const SquabbleComments = () => {
                         <div className="col mt-3">
                             <h3 className="text-center the-movie">The MOVIE is better because...</h3>
 
-
-                            <CommentsList comments={movieComments}/>
+                            {loading ? (
+                                <div>Loading</div>
+                            ) : (
+                               <CommentsList comments={movieComments2}/> 
+                            )
+                        }
+                            
 
 
                         </div>

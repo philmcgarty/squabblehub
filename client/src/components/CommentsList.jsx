@@ -1,14 +1,14 @@
 import React from "react";
 
 const CommentsList = (props) => {
-
+    // console.log(props.comments)
     return (
         // {/* <!-- Comments container --> */}
         <div className="card col" style={{ width: "27rem" }}
         // id="book-comments"
         >
             {props.comments.map(comment => (
-                <div key={comment.id} className="card-body">
+                <div key={comment._id} className="card-body">
 
                     {/* <!-- Comment --> */}
                     <div className="card shadow-sm" style={{ width: "25rem" }}>
@@ -16,9 +16,9 @@ const CommentsList = (props) => {
 
                             <blockquote className="blockquote mb-0">
                                 {/* User Review */}
-                                <p>{comment.quote}</p>
+                                <p>{comment.commentText}</p>
                                 {/* User Name */}
-                                <footer className="blockquote-footer">User: <cite title="Source Title">{comment.user}</cite></footer>
+                                <footer className="blockquote-footer">User: <cite title="Source Title">{comment.username}</cite></footer>
                             </blockquote>
                         </div>
                         {/* footer needs to be conditionally rendered based on user */}

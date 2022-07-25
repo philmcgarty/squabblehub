@@ -77,7 +77,7 @@ query squabbleAll{
 //*******COMMENT QUERIES**********************************************************//
 
 //(NO VARIABLE NEEDED) , returns the current commments in pro of movies
-export const QUERY_CURRENT_MOVIE_COMMENTS = qql`
+export const QUERY_CURRENT_MOVIE_COMMENTS = gql`
 query commentsByCurrentMovie{
   commentsByCurrentMovie {
     _id
@@ -91,7 +91,7 @@ query commentsByCurrentMovie{
 `;
 
 // (NO VARIABLE NEEDED) , returns the current comments in pro of books
-export const QUERY_CURRENT_BOOK_COMMENTS = qql`
+export const QUERY_CURRENT_BOOK_COMMENTS = gql`
 query commentsByCurrentBook{
   commentsByCurrentBook {
     _id
