@@ -48,14 +48,14 @@ const NextSquabblePoll = () => {
   };
   
     return (
-      
+      <>{loading ? ( <h3 className="text-center">Loading...</h3> ) : (
         <section>
           <div className="container display-grid">
             {/* <!-- Total container --> */}
             <div className="row justify-content-center mt-2" id="sqabble-choices">
-            {loading ? ( <div>Loading</div> ) : (
+            
               <h3 className="text-center">{question}</h3>
-            )}
+            
               {/* <!-- Card container --> */}
               <div className="row text-center mt-3">
   
@@ -111,6 +111,8 @@ const NextSquabblePoll = () => {
           </div>
          
         </section>
+        )}
+        </>
       );
   };
   
