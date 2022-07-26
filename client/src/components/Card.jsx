@@ -12,9 +12,10 @@ import Auth from '../utils/auth';
 const  Card = (props) => {
 
     const {loading, data} = useQuery(QUERY_SQUABBLE_ALL);
-    console.log(data.squabbleAll[0].bookVoteCount)
-    console.log(data.squabbleAll[0].movieVoteCount)
-
+    
+    const {bookVoteCount, movieVoteCount} = data?.squabbleAll[0] || [];
+    console.log(bookVoteCount,movieVoteCount)
+    
     // const [openModal, setOpenModal] = useState(false);
     
     const [voteBook] = useMutation(ADD_VOTE_CURRENT_BOOK);
@@ -31,7 +32,7 @@ const  Card = (props) => {
     }
 
     return (
-        <>
+        <>{loading ? ( <h3 className="text-center">Loading...</h3> ) : (
         <div className="card col text-center shadow-lg" style={{width: "18rem"}}>
             <div className="card-body">
                 <h4 className={props.props.typeClass + " card-title"} >The {props.props.mediaFormat}</h4>
@@ -47,7 +48,7 @@ const  Card = (props) => {
                 )}                
             </div>         
             {/* {openModal && <AddBookCommentModal />} */}
-        </div>            
+        </div>  )}          
         </>
     )
 }
