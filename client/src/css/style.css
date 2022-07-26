@@ -46,6 +46,13 @@ h3 {
   color: white;
 }
 
+.squabble-choice {
+  opacity: 85%;
+}
+.squabble-choice:hover {
+  opacity: 100%;
+}
+
 footer {
   margin-top: 30px !important;
 }

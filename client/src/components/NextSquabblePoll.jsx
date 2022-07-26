@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import choiceOne from '../images/300.jpg'
 import choiceTwo from '../images/Annihilation.jpg'
@@ -9,10 +9,9 @@ import { QUERY_POLLS } from '../utils/queries';
 import { NEXT_VOTE_ONE, NEXT_VOTE_TWO, NEXT_VOTE_THREE } from '../utils/mutations';
 
 const NextSquabblePoll = () => {
+
   const { loading, data } = useQuery(QUERY_POLLS);
   const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = data?.polls[0] || [];
-
-  
 
   const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
   const title1VotePercentage = Math.round(oneVoteCount / totalVotes * 100);
@@ -23,21 +22,26 @@ const NextSquabblePoll = () => {
   const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO);
   const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE);
 
-  const handleClick = (choice) => {
-   
-    switch (choice) {
+  
+
+  const handleClick = (event) => {
+    
+    switch (event.currentTarget.id) {
       case "choice1":
         voteNextOptOne();
-        
+        window.location.reload(false);
         break; 
+
       case "choice2":
         voteNextOptTwo();
-        
-        break;  
+        window.location.reload(false);
+        break;
+
       case "choice3":
         voteNextOptThree();
-        
+        window.location.reload(false);
         break;
+
       default:
         break;  
     } 
@@ -57,8 +61,8 @@ const NextSquabblePoll = () => {
   
                 {/* <!-- 1st Squabble choice --> */}
                 <div className="col content" >
-                  <div className="card shadow" style={{width: '18rem'}}>
-                    <button onClick={() => {handleClick("choice1");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-1">
+                  <div className="card shadow squabble-choice" style={{width: '18rem'}}>
+                    <button type='button' onClick={handleClick} className="btn btn-primary-outline img-thumbnail" data-bs-toggle="button" aria-pressed="true" id="choice1">
                       <div className="card-body">
                         <h4>{oneTitle}</h4>
                       </div>
@@ -70,8 +74,8 @@ const NextSquabblePoll = () => {
   
                 {/* <!-- 2nd Squabble choice --> */}
                 <div className="col content">
-                  <div className="card shadow" style={{width: '18rem'}}>
-                    <button onClick={() => {handleClick("choice2");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-2">
+                  <div className="card shadow squabble-choice" style={{width: '18rem'}}>
+                    <button type='button' onClick={handleClick} className="btn btn-primary-outline img-thumbnail" data-bs-toggle="button" aria-pressed="true" id="choice2">
                       <div className="card-body">
                         <h4>{twoTitle}</h4>
                       </div>
@@ -83,8 +87,8 @@ const NextSquabblePoll = () => {
             
                 {/* <!-- 3rd Squabble choice --> */}
                 <div className="col content">
-                  <div className="card shadow" style={{width: '18rem'}}>
-                    <button onClick={() => {handleClick("choice3");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-3">
+                  <div className="card shadow squabble-choice" style={{width: '18rem'}}>
+                    <button type='button' onClick={handleClick} className="btn btn-primary-outline img-thumbnail " data-bs-toggle="button" aria-pressed="true" id="choice3">
                       <div className="card-body">
                         <h4>{threeTitle}</h4>
                       </div>
