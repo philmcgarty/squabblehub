@@ -2,42 +2,17 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import vsGraphic from '../images/vs-img.png';
 import CommentsList from "./CommentsList";
-import { QUERY_SQUABBLE_ALL, QUERY_CURRENT_MOVIE_COMMENTS, QUERY_CURRENT_BOOK_COMMENTS } from "../utils/queries";
+import { QUERY_CURRENT_MOVIE_COMMENTS, QUERY_CURRENT_BOOK_COMMENTS } from "../utils/queries";
 
 const SquabbleComments = () => {
     const {loading, data} = useQuery(QUERY_CURRENT_MOVIE_COMMENTS);
-    console.log(data);
+    // console.log(data);
     const movieComments2 = data?.commentsByCurrentMovie;
     
     const {loading: bookloading ,data: bookData} = useQuery(QUERY_CURRENT_BOOK_COMMENTS);
-    console.log(bookData);
+    // console.log(bookData);
     const bookComments2 = bookData?.commentsByCurrentBook;
 
-    const bookComments = [
-        {
-            id: '1',
-            quote: 'This book is awesome, Tom Bombadil is the best! More singing please!',
-            user: 'TolkienFiend'
-        },
-        {
-            id: '2',
-            quote: 'The movies were not long enough, they left way too much out. What happened to the forest and the most important character, Tom Bombadil?',
-            user: 'Bookreader666'
-        }
-    ]
-    
-    const movieComments = [
-        {
-            id: '3',
-            quote: 'You have to watch the extended cut, it is da Bombadil!',
-            user: 'ILoveMovies'
-        },
-        {
-            id: '4',
-            quote: 'No way I have time to read the books, movie all the way!',
-            user: 'B.Baggins'
-        }
-    ]
     
     return (
         <section>
