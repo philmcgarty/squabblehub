@@ -1,71 +1,113 @@
 import React from 'react';
 
-import choiceOne from '../images/300vs-thumbnail.jpg'
-import choiceTwo from '../images/Annihilation-thumbnail.jpg'
-import choiceThree from '../images/Forrest-Gump-vs-Thumbnail.jpg'
+import choiceOne from '../images/300.jpg'
+import choiceTwo from '../images/Annihilation.jpg'
+import choiceThree from '../images/Forrest Gump.jpg'
+
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_POLLS } from '../utils/queries';
+import { NEXT_VOTE_ONE, NEXT_VOTE_TWO, NEXT_VOTE_THREE } from '../utils/mutations';
 
 const NextSquabblePoll = () => {
+  const { loading, data } = useQuery(QUERY_POLLS);
+  const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = data?.polls[0] || [];
+
+  
+
+  const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
+  const title1VotePercentage = Math.round(oneVoteCount / totalVotes * 100);
+  const title2VotePercentage = Math.round(twoVoteCount / totalVotes * 100);
+  const title3VotePercentage = Math.round(threeVoteCount / totalVotes * 100);
+
+  const [voteNextOptOne] = useMutation(NEXT_VOTE_ONE);
+  const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO);
+  const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE);
+
+  const handleClick = (choice) => {
+   
+    switch (choice) {
+      case "choice1":
+        voteNextOptOne();
+        
+        break; 
+      case "choice2":
+        voteNextOptTwo();
+        
+        break;  
+      case "choice3":
+        voteNextOptThree();
+        
+        break;
+      default:
+        break;  
+    } 
+  };
+  
     return (
+      
         <section>
-        <div className="container display-grid">
-          {/* <!-- Total container --> */}
-          <div className="row justify-content-center mt-2" id="sqabble-choices">
+          <div className="container display-grid">
+            {/* <!-- Total container --> */}
+            <div className="row justify-content-center mt-2" id="sqabble-choices">
+            {loading ? ( <div>Loading</div> ) : (
+              <h3 className="text-center">{question}</h3>
+            )}
+              {/* <!-- Card container --> */}
+              <div className="row text-center mt-3">
   
-            <h3 className="text-center">Vote for the next Squabble</h3>
-  
-            {/* <!-- Card container --> */}
-            <div className="row text-center mt-3">
-  
-              {/* <!-- 1st Squabble choice --> */}
-              <div className="col content">
-                <div className="card shadow" style={{width: '18rem'}}>
-                  <a href="/profile" className="btn btn-primary-outline img-thumbnail" id="squabble-choice-1">
-                    <div className="card-body">
-                      <h4>300</h4>
-                    </div>
-                    <img src={choiceOne} className="card-img-top" alt="..."/>
-                  </a>
+                {/* <!-- 1st Squabble choice --> */}
+                <div className="col content" >
+                  <div className="card shadow" style={{width: '18rem'}}>
+                    <button onClick={() => {handleClick("choice1");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-1">
+                      <div className="card-body">
+                        <h4>{oneTitle}</h4>
+                      </div>
+                      <img src={choiceOne} className="card-img-top" alt={`Voting option Title: ${oneTitle}`}/>
+                    </button>
+                    <h5 className='my-2'>{title1VotePercentage}% of Votes</h5>
+                  </div>
                 </div>
-              </div>
   
-              {/* <!-- 2nd Squabble choice --> */}
-              <div className="col content">
-                <div className="card shadow" style={{width: '18rem'}}>
-                  <a href="/profile" className="btn btn-primary-outline img-thumbnail" id="squabble-choice-2">
-                    <div className="card-body">
-                      <h4>Annihilation</h4>
-                    </div>
-                    <img src={choiceTwo} className="card-img-top" alt="..."/>
-                  </a>
+                {/* <!-- 2nd Squabble choice --> */}
+                <div className="col content">
+                  <div className="card shadow" style={{width: '18rem'}}>
+                    <button onClick={() => {handleClick("choice2");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-2">
+                      <div className="card-body">
+                        <h4>{twoTitle}</h4>
+                      </div>
+                      <img src={choiceTwo} className="card-img-top" alt={`Voting option Title: ${twoTitle}`}/>
+                    </button>
+                    <h5 className='my-2'>{title2VotePercentage}% of Votes</h5>
+                  </div>
                 </div>
-              </div>
             
-              {/* <!-- 3rd Squabble choice --> */}
-              <div className="col content">
-                <div className="card shadow" style={{width: '18rem'}}>
-                  <a href="/profile" className="btn btn-primary-outline img-thumbnail" id="squabble-choice-3">
-                    <div className="card-body">
-                      <h4>Forrest Gump</h4>
-                    </div>
-                    <img src={choiceThree} className="card-img-top" alt="..."/>
-                  </a>
+                {/* <!-- 3rd Squabble choice --> */}
+                <div className="col content">
+                  <div className="card shadow" style={{width: '18rem'}}>
+                    <button onClick={() => {handleClick("choice3");}} className="btn btn-primary-outline img-thumbnail" id="squabble-choice-3">
+                      <div className="card-body">
+                        <h4>{threeTitle}</h4>
+                      </div>
+                      <img src={choiceThree} className="card-img-top" alt={`Voting option Title: ${threeTitle}`}/>
+                    </button>
+                    <h5 className='my-2'>{title3VotePercentage}% of Votes</h5>
+                  </div>
                 </div>
               </div>
-  
+              {/* <!-- END of card container --> */}
             </div>
-            {/* <!-- END of card container --> */}
-            </div>
-            {/* <!-- END of total container --> */}
+              {/* <!-- END of total container --> */}
           </div>
-      {/* <!-- END of Vote for next section --> */}
+            {/* <!-- END of Vote for next section --> */}
   
           <div className="mt-5 content">
             <div className="card-body p-3 text-danger text-center">
               <p><strong>Voting ends at 9PM (EST) every Sunday.</strong></p>
             </div>
           </div>
-      </section>
-    );
+         
+        </section>
+      );
   };
   
   export default NextSquabblePoll;

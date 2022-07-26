@@ -4,9 +4,9 @@ import { QUERY_SUGGESTIONS } from '../utils/queries';
 
 const SuggestionHistory = () => {
     const {loading, data} = useQuery(QUERY_SUGGESTIONS);
-        console.log(data)
-        const suggestions = data?.suggestionAllorByUser || [];
-        console.log(suggestions);
+        
+    const suggestions = data?.suggestionAllorByUser || [];
+        
     return (
         <div className="col">
             <h3 className="text-center">Your Squabble Suggestions</h3>

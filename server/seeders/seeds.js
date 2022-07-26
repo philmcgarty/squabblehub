@@ -137,7 +137,7 @@ const { _id: userId8 } = createdUsers.ops[randomUserIndex(9)];
     //     votes: Math.round(Math.random() * 20)
     //   }
     // ]
-    question: "Help Pick Next Week's Squabble",
+    question: "Vote for Next Week's Squabble",
     oneVoters: [userId1, userId2, userId3, userId4],
     twoVoters: [userId5, userId6],
     threeVoters: [userId7, userId8],
