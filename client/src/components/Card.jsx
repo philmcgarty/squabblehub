@@ -4,6 +4,7 @@ import lotrBookCard from '../images/LOTR_Book.webp';
 import vsGraphic from '../images/vs-img.png';
 import lotrFilmCard from '../images/LOTR-movie-resized.jpg';
 import AddBookCommentModal from "../components/modals/AddBookCommentModal";
+import AddMovieCommentModal from "./modals/AddMovieCommentModal";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_VOTE_CURRENT_BOOK, ADD_VOTE_CURRENT_MOVIE } from "../utils/mutations";
 import { QUERY_SQUABBLE_ALL } from "../utils/queries";
@@ -11,13 +12,8 @@ import Auth from '../utils/auth';
 
 const  Card = (props) => {
 
-    const {loading, data} = useQuery(QUERY_SQUABBLE_ALL);
-    
-    const {bookVoteCount, movieVoteCount} = data?.squabbleAll[0] || [];
-    console.log(bookVoteCount,movieVoteCount)
-    
-    const [openModal, setOpenModal] = useState(false);
-    
+    const {loading, data} = useQuery(QUERY_SQUABBLE_ALL);    
+    const {bookVoteCount, movieVoteCount} = data?.squabbleAll[0] || [];      
     const [voteBook] = useMutation(ADD_VOTE_CURRENT_BOOK);
     const [voteMovie] = useMutation(ADD_VOTE_CURRENT_MOVIE)
 
@@ -39,16 +35,18 @@ const  Card = (props) => {
         }   
     }
 
-    const addBookComment = () => {
-        console.log("You want to add a book comment")
-    }
+    // for book
+    const [show, setShow] = useState(false)
+    // for movie
+    const [showMovie, setShowMovie] = useState(false)
 
-    const addMovieComment = () => {
-        console.log("You want to add a movie comment")
-    }
 
     return (
-        <>{loading ? ( <h3 className="text-center">Loading...</h3> ) : (
+        <>
+            <AddBookCommentModal onClose={() => setShow(false)} show={show}/>
+            <AddMovieCommentModal onClose={() => setShowMovie(false)} showMovie={showMovie}/>
+        <>
+        {loading ? ( <h3 className="text-center">Loading...</h3> ) : (
         <div className="card col text-center shadow-lg" style={{width: "18rem"}}>
             <div className="card-body">
                 <h4 className={props.props.typeClass + " card-title"} >The {props.props.mediaFormat}</h4>
@@ -70,7 +68,7 @@ const  Card = (props) => {
                             {!Auth.loggedIn()? (
                                 <></>
                             ): (
-                               <button onClick={addBookComment} className={"btn " + props.props.buttonClass}>Add book comment</button> 
+                                <button onClick={ () => setShow(true) } className={"btn " + props.props.buttonClass}>Add book comment</button> 
                             )}
                             
                         </>
@@ -81,14 +79,15 @@ const  Card = (props) => {
                             {!Auth.loggedIn()? (
                                 <></>
                             ): (
-                               <button onClick={addMovieComment} className={"btn " + props.props.buttonClass}>Add movie comment</button> 
+                                <button onClick={ () => setShowMovie(true) } className={"btn " + props.props.buttonClass}>Add movie comment</button> 
                             )}
                         </>
                         
                     )}
             </div>        
-            {openModal && <AddBookCommentModal />}
+            
         </div>  )}          
+        </>
         </>
     )
 }
