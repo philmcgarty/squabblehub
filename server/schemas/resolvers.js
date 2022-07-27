@@ -318,7 +318,7 @@ const resolvers = {
     voteNextOptOne: async (parent, args, context ) => {
       if (context.user) {
         const updatedPoll = await Polls.findOneAndUpdate(
-        { question: "Help Pick Next Week's Squabble" },
+        { question: "Vote for Next Week's Squabble" },
         { 
               $pull: { twoVoters: context.user._id, threeVoters: context.user._id},
               // $pull: { threeVoters: context.user._id},
@@ -337,7 +337,7 @@ const resolvers = {
     voteNextOptTwo: async (parent, args, context ) => {
       if (context.user) {
         const updatedPoll = await Polls.findOneAndUpdate(
-        { question: "Help Pick Next Week's Squabble" },
+        { question: "Vote for Next Week's Squabble" },
         { 
         $pull: { oneVoters: context.user._id, threeVoters: context.user._id},
         // $pull: { threeVoters: context.user._id}, 
@@ -356,7 +356,7 @@ const resolvers = {
     voteNextOptThree: async (parent, args, context ) => {
       if (context.user) {
         const updatedPoll = await Polls.findOneAndUpdate(
-        { question: "Help Pick Next Week's Squabble" },
+        { question: "Vote for Next Week's Squabble" },
         { 
               $pull: { oneVoters: context.user._id, twoVoters: context.user._id},
               // $pull: { twoVoters: context.user._id},
