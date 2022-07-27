@@ -4,18 +4,13 @@ import SignupForm from "../components/SignupForm";
 
 const LoginSignup = () => {
 
-
     return (
         <main className="content">
 
-
     {/* <!-- Container div --> */}
     <div className="row container ">
-
       <SignupForm />
-
       <LoginForm />
-      
     </div>
   </main>
     )
