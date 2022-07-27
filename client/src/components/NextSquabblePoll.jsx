@@ -12,38 +12,45 @@ const NextSquabblePoll = (props) => {
 
   const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = props.pollData
   const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
-        console.log(Math.round(oneVoteCount / totalVotes * 100))
         
+        
+        const votePercentage1 =  Math.round(oneVoteCount / totalVotes * 100);
+        const votePercentage2 =  Math.round(twoVoteCount / totalVotes * 100);
+        const votePercentage3 =  Math.round(threeVoteCount / totalVotes * 100);
 
-  const [votePercentage1, setVotePercentage1] = useState(Math.round(oneVoteCount / totalVotes * 100));
-  const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
-  const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
+  // const [votePercentage1, setVotePercentage1] = useState( window.location.reload(false);));
+  // const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
+  // const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
        
-  const [voteNextOptOne,{data:dataVote1}] = useMutation(NEXT_VOTE_ONE,);
-  const [voteNextOptTwo, {data:dataVote2}] = useMutation(NEXT_VOTE_TWO);
-  const [voteNextOptThree, {data:dataVote3}] = useMutation(NEXT_VOTE_THREE);
+  const [voteNextOptOne] = useMutation(NEXT_VOTE_ONE,);
+  const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO);
+  const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE);
 
-  const setAllVotePercentage = (voteData) => {
+  // const setAllVotePercentage = (voteData) => {
     
-    const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
-      setVotePercentage1((Math.round(oneVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-      setVotePercentage2((Math.round(twoVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-      setVotePercentage3((Math.round(threeVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-  };
+  //   const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
+  //     setVotePercentage1((Math.round(oneVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+  //     setVotePercentage2((Math.round(twoVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+  //     setVotePercentage3((Math.round(threeVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+  // };
 
   const handleClick = (event) => {
     
       if(event.currentTarget.id === "choice1" ) {
         voteNextOptOne()
-        .then(setAllVotePercentage(dataVote1.voteNextOptOne))   
+        window.location.reload(false);
+        // .then(setAllVotePercentage(dataVote1.voteNextOptOne))   
       }
       else if (event.currentTarget.id === "choice2") {
         voteNextOptTwo()
-        .then(setAllVotePercentage(dataVote2.voteNextOptTwo))        
+        window.location.reload(false);
+        // .then(setAllVotePercentage(dataVote2.voteNextOptTwo))   
+           
       }
       else {
         voteNextOptThree()
-        .then(setAllVotePercentage(dataVote3.voteNextOptThree))   
+        window.location.reload(false);
+        // .then(setAllVotePercentage(dataVote3.voteNextOptThree))   
       }  
   
     };
