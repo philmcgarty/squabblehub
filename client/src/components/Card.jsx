@@ -16,7 +16,7 @@ const  Card = (props) => {
     const {bookVoteCount, movieVoteCount} = data?.squabbleAll[0] || [];
     console.log(bookVoteCount,movieVoteCount)
     
-    // const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     
     const [voteBook] = useMutation(ADD_VOTE_CURRENT_BOOK);
     const [voteMovie] = useMutation(ADD_VOTE_CURRENT_MOVIE)
@@ -29,6 +29,22 @@ const  Card = (props) => {
             voteMovie();
             console.log('You voted movie!');
         }
+    }
+
+    const displayVote = ()=>{        
+        if (props.props.mediaFormat === 'Book'){
+            return true;
+        } else {
+            return false;
+        }   
+    }
+
+    const addBookComment = () => {
+        console.log("You want to add a book comment")
+    }
+
+    const addMovieComment = () => {
+        console.log("You want to add a movie comment")
     }
 
     return (
@@ -46,8 +62,32 @@ const  Card = (props) => {
                     // else if logged in will allow vote
                     <button onClick={handleVote} className={"btn " + props.props.buttonClass}>Vote for the {props.props.mediaFormatCaps}</button>
                 )}                
-            </div>         
-            {/* {openModal && <AddBookCommentModal />} */}
+            </div>
+            <div>
+                    {displayVote() ? (
+                        <>
+                            <h4>Votes: {bookVoteCount}</h4>
+                            {!Auth.loggedIn()? (
+                                <></>
+                            ): (
+                               <button onClick={addBookComment} className={"btn " + props.props.buttonClass}>Add book comment</button> 
+                            )}
+                            
+                        </>
+                        
+                    ) : (
+                        <>
+                            <h4>Votes: {movieVoteCount}</h4>
+                            {!Auth.loggedIn()? (
+                                <></>
+                            ): (
+                               <button onClick={addMovieComment} className={"btn " + props.props.buttonClass}>Add movie comment</button> 
+                            )}
+                        </>
+                        
+                    )}
+            </div>        
+            {openModal && <AddBookCommentModal />}
         </div>  )}          
         </>
     )
