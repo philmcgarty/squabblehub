@@ -2,11 +2,37 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { COMMENT_ADD_CURRENT_BOOK } from "../../utils/mutations";
+import  {QUERY_CURRENT_BOOK_COMMENTS, QUERY_USER_ME} from '../../utils/queries'
 
 const AddBookCommentModal = (props) => {
   const [commentText, setText] = useState('');
-  const [addComment, { error }] = useMutation(COMMENT_ADD_CURRENT_BOOK);
   const [characterCount, setCharacterCount] = useState(0);
+  
+  const [commentAddCurrentBook, { error }] = useMutation(COMMENT_ADD_CURRENT_BOOK, {
+    update(cache, { data: { commentAddCurrentBook } }) {
+      
+      // could potentially not exist yet, so wrap in a try/catch
+      try {
+          // update me array's cache
+          const { userMe } = cache.readQuery({ query: QUERY_USER_ME });
+          cache.writeQuery({
+              query: QUERY_USER_ME,
+              data: { userMe: { ...userMe, comments: [...userMe.comments, commentAddCurrentBook] } },
+          });
+      } 
+      catch (e) {
+          console.warn("First comment insertion by user!")
+      }
+  
+      // update thought array's cache
+      const { commentsByCurrentBook } = cache.readQuery({ query:QUERY_CURRENT_BOOK_COMMENTS });
+      cache.writeQuery({
+          query: QUERY_CURRENT_BOOK_COMMENTS,
+          data: { commentsByCurrentBook: [commentAddCurrentBook, ...commentsByCurrentBook] },
+      });
+  }
+  });
+
 
   // stops modal from showing by default
   if (!props.show) {
@@ -26,7 +52,7 @@ const AddBookCommentModal = (props) => {
     event.preventDefault();
 
     try {
-      await addComment({
+      await commentAddCurrentBook({
         variables: { commentText }
       });
       setText('');
