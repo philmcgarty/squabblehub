@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/philmcgarty/squabblehub#readme",
   "devDependencies": {
-    "concurrently": "^7.2.2"
+    "concurrently": "^7.3.0"
   }
 }
