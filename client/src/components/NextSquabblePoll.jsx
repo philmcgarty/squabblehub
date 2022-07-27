@@ -11,9 +11,7 @@ import { NEXT_VOTE_ONE, NEXT_VOTE_TWO, NEXT_VOTE_THREE } from '../utils/mutation
 const NextSquabblePoll = (props) => {
 
   const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = props.pollData
-  const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
-        console.log(Math.round(oneVoteCount / totalVotes * 100))
-        
+  const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;   
 
   const [votePercentage1, setVotePercentage1] = useState(Math.round(oneVoteCount / totalVotes * 100));
   const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
