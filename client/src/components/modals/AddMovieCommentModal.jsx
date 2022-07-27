@@ -1,3 +1,4 @@
+// MODAL FOR ADDING A MOVIE
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { COMMENT_ADD_CURRENT_MOVIE } from "../../utils/mutations";
@@ -6,7 +7,8 @@ const AddMovieCommentModal = (props) => {
     const [commentText, setText] = useState('');
     const [addComment, { error }] = useMutation(COMMENT_ADD_CURRENT_MOVIE);
     const [characterCount, setCharacterCount] = useState(0);
-
+    
+    // stops modal from showing by default
     if (!props.showMovie) {
         return null
     }
@@ -45,7 +47,7 @@ const AddMovieCommentModal = (props) => {
                     </div>
                     <form onSubmit={handleFormSubmit}>
                         <div className="form-group p-3">
-                            <label htmlFor="new-comment">Comment on the MOVIE here:</label>
+                            <label htmlFor="new-comment" className="white-text">Comment on the MOVIE here:</label>
                             <textarea
                                 className="form-control" id="new-movie-comment" rows="3"
                                 value={commentText}

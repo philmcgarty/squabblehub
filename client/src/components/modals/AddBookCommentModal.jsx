@@ -1,3 +1,4 @@
+// MODAL FOR ADDING A BOOK
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { COMMENT_ADD_CURRENT_BOOK } from "../../utils/mutations";
@@ -6,32 +7,33 @@ const AddBookCommentModal = (props) => {
   const [commentText, setText] = useState('');
   const [addComment, { error }] = useMutation(COMMENT_ADD_CURRENT_BOOK);
   const [characterCount, setCharacterCount] = useState(0);
-  
+
+  // stops modal from showing by default
   if (!props.show) {
     return null
   }
 
+  // function copied from module 21 code
   const handleChange = event => {
     if (event.target.value.length <= 280) {
-        setText(event.target.value);
-        setCharacterCount(event.target.value.length);
+      setText(event.target.value);
+      setCharacterCount(event.target.value.length);
     }
-};
-  
+  };
 
+  // function copied from module 21 code
   const handleFormSubmit = async event => {
-      event.preventDefault();
-      
-      try {
-          await addComment({
-              // needs to be another variable for user id
-            variables: { commentText }
-          });
-          setText('');
-      } catch (e) {
-          console.log(e);
-      }
-      props.onClose();
+    event.preventDefault();
+
+    try {
+      await addComment({
+        variables: { commentText }
+      });
+      setText('');
+    } catch (e) {
+      console.log(e);
+    }
+    props.onClose();
   };
 
   return (
@@ -45,7 +47,7 @@ const AddBookCommentModal = (props) => {
           </div>
           <form onSubmit={handleFormSubmit}>
             <div className="form-group p-3">
-              <label htmlFor="new-comment">Comment on the BOOK here:</label>
+              <label htmlFor="new-comment" className="white-text">Comment on the BOOK here:</label>
               <textarea
                 className="form-control" id="new-comment" rows="3"
                 value={commentText}

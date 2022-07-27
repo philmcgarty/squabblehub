@@ -6,11 +6,9 @@ import { QUERY_CURRENT_MOVIE_COMMENTS, QUERY_CURRENT_BOOK_COMMENTS } from "../ut
 
 const SquabbleComments = () => {
     const {loading, data} = useQuery(QUERY_CURRENT_MOVIE_COMMENTS);
-    // console.log(data);
     const movieComments2 = data?.commentsByCurrentMovie;
     
     const {loading: bookloading ,data: bookData} = useQuery(QUERY_CURRENT_BOOK_COMMENTS);
-    // console.log(bookData);
     const bookComments2 = bookData?.commentsByCurrentBook;
    
     return (
@@ -20,17 +18,16 @@ const SquabbleComments = () => {
                     <div className="row justify-content-center">
                         <h2 className="m-4 text-center">Squabble</h2>
 
-
                         {/* <!-- BOOK CHOICE = Cards for those who select books --> */}
                         <div className="col mt-3">
                             <h3 className="text-center the-book">The BOOK is better because...</h3>
 
                             {bookloading ? (
                                 <div>Loading</div>
-                            ) : (
+                                ) : (
                                <CommentsList comments={bookComments2}/> 
                             )
-                        }
+                            }
                             
                         </div>
                         {/* <!-- BOOK END-->  */}
@@ -49,10 +46,8 @@ const SquabbleComments = () => {
                             ) : (
                                <CommentsList comments={movieComments2}/> 
                             )
-                        }
+                            }
                             
-
-
                         </div>
                         {/* <!-- MOVIE END--> */}
                     </div>

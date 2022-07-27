@@ -39,8 +39,6 @@ const ThisWeekSquabble = () => {
 
         {/* <!-- Movie card --> */}
         <Card props={cards[1]}/>
-        
-
     </div>
     )
 }
