@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import choiceOne from '../images/300.jpg'
 import choiceTwo from '../images/Annihilation.jpg'
@@ -12,43 +12,42 @@ const NextSquabblePoll = (props) => {
 
   const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = props.pollData
   const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;     
-  console.log(oneVoteCount, twoVoteCount, threeVoteCount)
+ 
+  const [voteNextOptOne] = useMutation(NEXT_VOTE_ONE);
+  const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO);
+  const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE);
+
   
-  const [votePercentage1, setVotePercentage1] = useState(Math.round(oneVoteCount / totalVotes * 100));
-  const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
-  const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
-       
-  const [voteNextOptOne,{data:dataVote1}] = useMutation(NEXT_VOTE_ONE,);
-  const [voteNextOptTwo, {data:dataVote2}] = useMutation(NEXT_VOTE_TWO);
-  const [voteNextOptThree, {data:dataVote3}] = useMutation(NEXT_VOTE_THREE);
-
-  const setAllVotePercentage = (voteData) => {
-    
-    const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
-      setVotePercentage1((Math.round(oneVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-      setVotePercentage2((Math.round(twoVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-      setVotePercentage3((Math.round(threeVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
-  };
-
   const handleClick = (event) => {
     
       if(event.currentTarget.id === "choice1" ) {
-        voteNextOptOne();
-        console.log(dataVote1)
-        setAllVotePercentage(dataVote1.voteNextOptOne);  
+        voteNextOptOne();  
       }
       else if (event.currentTarget.id === "choice2") {
-        voteNextOptTwo();
-        console.log(dataVote2)
-        setAllVotePercentage(dataVote2.voteNextOptTwo);        
+        voteNextOptTwo();       
       }
       else {
         voteNextOptThree();
-        console.log(dataVote3)
-        setAllVotePercentage(dataVote3.voteNextOptThree);   
+ 
       }  
   
     };
+
+    const displayVote = (choice)=>{    
+       
+      if ( choice === 1) {
+         const choiceOnePercentage = Math.round(oneVoteCount / totalVotes * 100)
+          return choiceOnePercentage
+      } 
+      else if (choice === 2){
+        const choiceTwoPercentage = Math.round(twoVoteCount / totalVotes * 100)
+        return choiceTwoPercentage
+      }
+      else {
+        const choiceThreePercentage = Math.round(threeVoteCount / totalVotes * 100)
+        return choiceThreePercentage
+      }   
+  }
     return (
       
         <section>
@@ -70,7 +69,7 @@ const NextSquabblePoll = (props) => {
                       </div>
                       <img src={choiceOne} className="card-img-top" alt={`Voting option Title: ${oneTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{votePercentage1}% of Votes</h5>
+                    <h5 className='my-2' >{displayVote(1)}% of Votes</h5>
                   </div>
                 </div>
   
@@ -83,7 +82,7 @@ const NextSquabblePoll = (props) => {
                       </div>
                       <img src={choiceTwo} className="card-img-top" alt={`Voting option Title: ${twoTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{votePercentage2}% of Votes</h5>
+                    <h5 className='my-2'>{displayVote(2)}% of Votes</h5>
                   </div>
                 </div>
             
@@ -96,7 +95,7 @@ const NextSquabblePoll = (props) => {
                       </div>
                       <img src={choiceThree} className="card-img-top" alt={`Voting option Title: ${threeTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{votePercentage3}% of Votes</h5>
+                    <h5 className='my-2'>{displayVote(3)}% of Votes</h5>
                   </div>
                 </div>
               </div>
