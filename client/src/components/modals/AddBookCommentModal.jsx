@@ -1,30 +1,69 @@
-import React from "react";
+// MODAL FOR ADDING A BOOK
+import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { COMMENT_ADD_CURRENT_BOOK } from "../../utils/mutations";
 
-const AddBookCommentModal = () => {
-    return (
+const AddBookCommentModal = (props) => {
+  const [commentText, setText] = useState('');
+  const [addComment, { error }] = useMutation(COMMENT_ADD_CURRENT_BOOK);
+  const [characterCount, setCharacterCount] = useState(0);
 
-      <div>This is a modal!</div>
-        // <!-- Modal to Add BOOK Comment -->
-    // <div className="modal fade" id="add-book-comment-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    //   <div className="modal-dialog">
-    //     <div className="modal-content">
-    //       <div className="modal-header">
-    //         <h4 className="modal-title m-2 p-2 text-center the-book" id="add-book-comment-modal-btn">Add your comment</h4>
-    //         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    //       </div>
-    //       <div className="form-group p-3">
-    //         <label htmlFor="new-comment">Comment on the BOOK here:</label>
-    //         <textarea className="form-control" id="new-comment" rows="3"></textarea>
-    //       </div>
-    //       <div className="modal-footer">
-    //         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    //         <button type="button" className="btn btn-danger" id="submit-new-comment" data-bs-dismiss="modal">Submit</button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
+  // stops modal from showing by default
+  if (!props.show) {
+    return null
+  }
+
+  // function copied from module 21 code
+  const handleChange = event => {
+    if (event.target.value.length <= 280) {
+      setText(event.target.value);
+      setCharacterCount(event.target.value.length);
+    }
+  };
+
+  // function copied from module 21 code
+  const handleFormSubmit = async event => {
+    event.preventDefault();
+
+    try {
+      await addComment({
+        variables: { commentText }
+      });
+      setText('');
+    } catch (e) {
+      console.log(e);
+    }
+    props.onClose();
+  };
+
+  return (
+    // <!-- Modal to Add BOOK Comment -->
+    <div className="new-modal" id="add-book-comment-modal" tabIndex="-1" aria-labelledby="exampleModalLabel" onClick={props.onClose}>
+      <div className="modal-dialog">
+        <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="modal-header">
+            <h4 className="modal-title m-2 p-2 text-center the-book" id="add-book-comment-modal-btn">Add your comment</h4>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={props.onClose}></button>
+          </div>
+          <form onSubmit={handleFormSubmit}>
+            <div className="form-group p-3">
+              <label htmlFor="new-comment" className="white-text">Comment on the BOOK here:</label>
+              <textarea
+                className="form-control" id="new-comment" rows="3"
+                value={commentText}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={props.onClose} >Close</button>
+              <button type="submit" className="btn btn-danger" id="submit-new-comment" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     // <!-- END of Modal to Add Comment-->
-    )
+  )
 }
 
 export default AddBookCommentModal;
