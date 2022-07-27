@@ -22,7 +22,7 @@ const NextSquabblePoll = (props) => {
   const [voteNextOptThree, {data:dataVote3}] = useMutation(NEXT_VOTE_THREE);
 
   const setAllVotePercentage = (voteData) => {
-    
+    console.log(voteData)
     const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
       setVotePercentage1((Math.round(oneVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
       setVotePercentage2((Math.round(twoVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
