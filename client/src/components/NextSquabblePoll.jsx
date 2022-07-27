@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import choiceOne from '../images/300.jpg'
 import choiceTwo from '../images/Annihilation.jpg'
