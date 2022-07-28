@@ -11,9 +11,10 @@ import { NEXT_VOTE_ONE, NEXT_VOTE_TWO, NEXT_VOTE_THREE } from '../utils/mutation
 const NextSquabblePoll = (props) => {
 
   const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = props.pollData
-  const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;     
-  console.log(oneVoteCount, twoVoteCount, threeVoteCount)
-  
+  const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
+        console.log(Math.round(oneVoteCount / totalVotes * 100))
+        
+
   const [votePercentage1, setVotePercentage1] = useState(Math.round(oneVoteCount / totalVotes * 100));
   const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
   const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
@@ -33,19 +34,16 @@ const NextSquabblePoll = (props) => {
   const handleClick = (event) => {
     
       if(event.currentTarget.id === "choice1" ) {
-        voteNextOptOne();
-        console.log(dataVote1)
-        setAllVotePercentage(dataVote1.voteNextOptOne);  
+        voteNextOptOne()
+        .then(setAllVotePercentage(dataVote1.voteNextOptOne))   
       }
       else if (event.currentTarget.id === "choice2") {
-        voteNextOptTwo();
-        console.log(dataVote2)
-        setAllVotePercentage(dataVote2.voteNextOptTwo);        
+        voteNextOptTwo()
+        .then(setAllVotePercentage(dataVote2.voteNextOptTwo))        
       }
       else {
-        voteNextOptThree();
-        console.log(dataVote3)
-        setAllVotePercentage(dataVote3.voteNextOptThree);   
+        voteNextOptThree()
+        .then(setAllVotePercentage(dataVote3.voteNextOptThree))   
       }  
   
     };

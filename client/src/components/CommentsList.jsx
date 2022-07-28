@@ -5,26 +5,13 @@ import Auth from "../utils/auth";
 
 const CommentsList = (props) => {
     
-    // const [deleteComment] = useMutation(COMMENT_DELETE);
-
-    // const handelDelete = (e) => {
-    //     e.preventDefault()
-    //     const commentId = e.target.getAttribute("data-id")
-    //     deleteComment({ _id: commentId });
-    //   }
-
     const [deleteComment] = useMutation(COMMENT_DELETE);
+    //console.log(props.comments[0])
+    // delete function, needs comment id to be passed to mutation
     
-    const deleteItem = (itemId, name) => (event) =>  {
-        console.log(itemId); 
-        event.preventDefault()
-        deleteComment({
-            // variables: {
-            _id: itemId,
-            username: name
-        //   }
-        })
-      }
+    const deleteHandler = (comment) => {
+        deleteComment({variables: {commentId: comment._id}});
+    }
 
     return (
         // {/* <!-- Comments container --> */}
@@ -50,8 +37,8 @@ const CommentsList = (props) => {
                         {Auth.loggedIn() && (
                         <form data-id={comment.id}>
                         <div className="card-footer text-center">
-                            {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil" ></i> Edit comment</a></span> */}
-                            <button  onClick={deleteItem(comment._id, comment.username)}><span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can"></i> Delete comment</a></span></button>
+                            {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span> */}
+                            <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler(comment)}></i> delete comment</a></span>
                         </div>
                         </form>
                         )}
