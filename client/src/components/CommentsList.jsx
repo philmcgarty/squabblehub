@@ -33,7 +33,7 @@ const CommentsList = (props) => {
                         </div>
                         {/* footer needs to be conditionally rendered based on user */}
                         <div className="card-footer text-center">
-                            <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span>
+                            {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span> */}
                             <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler(comment)}></i> delete comment</a></span>
                         </div>
                     </div>
