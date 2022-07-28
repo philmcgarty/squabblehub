@@ -28,7 +28,7 @@ const SquabbleComments = () => {
                                <CommentsList comments={bookComments2}/> 
                             )
                             }
-                            
+                                                   
                         </div>
                         {/* <!-- BOOK END-->  */}
 

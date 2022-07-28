@@ -1,7 +1,4 @@
 import React from "react";
-import lotrBookCard from '../images/LOTR_Book.webp';
-import vsGraphic from '../images/vs-img.png';
-import lotrFilmCard from '../images/LOTR-movie-resized.jpg';
 import ThisWeekSquabble from "../components/ThisWeekSquabble";
 import SquabbleComments from "../components/SquabbleComments";
 
