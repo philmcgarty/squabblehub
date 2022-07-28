@@ -1,54 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import choiceOne from '../images/300.jpg'
 import choiceTwo from '../images/Annihilation.jpg'
 import choiceThree from '../images/Forrest Gump.jpg'
 
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_POLLS } from '../utils/queries';
+import { useMutation } from '@apollo/client';
+
 import { NEXT_VOTE_ONE, NEXT_VOTE_TWO, NEXT_VOTE_THREE } from '../utils/mutations';
 
-const NextSquabblePoll = () => {
+const NextSquabblePoll = (props) => {
 
-  const { loading, data } = useQuery(QUERY_POLLS);
-  const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = data?.polls[0] || [];
-
+  const {question, oneTitle, oneVoteCount, twoTitle, twoVoteCount, threeTitle, threeVoteCount} = props.pollData
   const totalVotes = oneVoteCount + twoVoteCount + threeVoteCount;
-  const title1VotePercentage = Math.round(oneVoteCount / totalVotes * 100);
-  const title2VotePercentage = Math.round(twoVoteCount / totalVotes * 100);
-  const title3VotePercentage = Math.round(threeVoteCount / totalVotes * 100);
+        console.log(Math.round(oneVoteCount / totalVotes * 100))
+        
 
-  const [voteNextOptOne] = useMutation(NEXT_VOTE_ONE);
-  const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO);
-  const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE);
+  const [votePercentage1, setVotePercentage1] = useState(Math.round(oneVoteCount / totalVotes * 100));
+  const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
+  const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
+       
+  const [voteNextOptOne,{data:dataVote1}] = useMutation(NEXT_VOTE_ONE,);
+  const [voteNextOptTwo, {data:dataVote2}] = useMutation(NEXT_VOTE_TWO);
+  const [voteNextOptThree, {data:dataVote3}] = useMutation(NEXT_VOTE_THREE);
 
-  
+  const setAllVotePercentage = (voteData) => {
+    
+    const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
+      setVotePercentage1((Math.round(oneVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+      setVotePercentage2((Math.round(twoVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+      setVotePercentage3((Math.round(threeVoteCount / (oneVoteCount + twoVoteCount + threeVoteCount) * 100)))
+  };
 
   const handleClick = (event) => {
     
-    switch (event.currentTarget.id) {
-      case "choice1":
-        voteNextOptOne();
-        window.location.reload(false);
-        break; 
-
-      case "choice2":
-        voteNextOptTwo();
-        window.location.reload(false);
-        break;
-
-      case "choice3":
-        voteNextOptThree();
-        window.location.reload(false);
-        break;
-
-      default:
-        break;  
-    } 
-  };
+      if(event.currentTarget.id === "choice1" ) {
+        voteNextOptOne()
+        .then(setAllVotePercentage(dataVote1.voteNextOptOne))   
+      }
+      else if (event.currentTarget.id === "choice2") {
+        voteNextOptTwo()
+        .then(setAllVotePercentage(dataVote2.voteNextOptTwo))        
+      }
+      else {
+        voteNextOptThree()
+        .then(setAllVotePercentage(dataVote3.voteNextOptThree))   
+      }  
   
+    };
     return (
-      <>{loading ? ( <h3 className="text-center">Loading...</h3> ) : (
+      
         <section>
           <div className="container display-grid">
             {/* <!-- Total container --> */}
@@ -68,7 +68,7 @@ const NextSquabblePoll = () => {
                       </div>
                       <img src={choiceOne} className="card-img-top" alt={`Voting option Title: ${oneTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{title1VotePercentage}% of Votes</h5>
+                    <h5 className='my-2'>{votePercentage1}% of Votes</h5>
                   </div>
                 </div>
   
@@ -81,7 +81,7 @@ const NextSquabblePoll = () => {
                       </div>
                       <img src={choiceTwo} className="card-img-top" alt={`Voting option Title: ${twoTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{title2VotePercentage}% of Votes</h5>
+                    <h5 className='my-2'>{votePercentage2}% of Votes</h5>
                   </div>
                 </div>
             
@@ -94,7 +94,7 @@ const NextSquabblePoll = () => {
                       </div>
                       <img src={choiceThree} className="card-img-top" alt={`Voting option Title: ${threeTitle}`}/>
                     </button>
-                    <h5 className='my-2'>{title3VotePercentage}% of Votes</h5>
+                    <h5 className='my-2'>{votePercentage3}% of Votes</h5>
                   </div>
                 </div>
               </div>
@@ -111,8 +111,8 @@ const NextSquabblePoll = () => {
           </div>
          
         </section>
-        )}
-        </>
+       
+       
       );
   };
   
