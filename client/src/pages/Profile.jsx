@@ -5,15 +5,12 @@ import NextSquabblePoll from "../components/NextSquabblePoll";
 import SuggestionForm from "../components/SuggestionForm";
 import SuggestionHistory from "../components/SuggestionHistory";
 
-import { QUERY_POLLS, QUERY_USER_ME } from '../utils/queries';
+import { QUERY_POLLS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth'
 
 const Profile = () => {
     
-
-  
-
     const { loading, data } = useQuery(QUERY_POLLS);
     const pollData = data?.polls[0] || [];
     

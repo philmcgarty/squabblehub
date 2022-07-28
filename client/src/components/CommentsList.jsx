@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMutation } from "@apollo/client";
 import { COMMENT_DELETE } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -6,11 +6,8 @@ import Auth from "../utils/auth";
 const CommentsList = (props) => {
     
     const [deleteComment] = useMutation(COMMENT_DELETE);
-    //console.log(props.comments[0])
-    // delete function, needs comment id to be passed to mutation
     
     const deleteHandler = (comment) => {
-        console.log(comment);
         deleteComment({variables: {commentId: comment._id}});
     }
 

@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import lotrBookCard from '../images/LOTR_Book.webp';
-import vsGraphic from '../images/vs-img.png';
-import lotrFilmCard from '../images/LOTR-movie-resized.jpg';
 import AddBookCommentModal from "../components/modals/AddBookCommentModal";
 import AddMovieCommentModal from "./modals/AddMovieCommentModal";
 import { useQuery, useMutation } from "@apollo/client";
