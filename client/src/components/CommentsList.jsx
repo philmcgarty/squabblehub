@@ -5,16 +5,26 @@ import Auth from "../utils/auth";
 
 const CommentsList = (props) => {
     
+    // const [deleteComment] = useMutation(COMMENT_DELETE);
+
+    // const handelDelete = (e) => {
+    //     e.preventDefault()
+    //     const commentId = e.target.getAttribute("data-id")
+    //     deleteComment({ _id: commentId });
+    //   }
+
     const [deleteComment] = useMutation(COMMENT_DELETE);
-
-    // delete function, needs comment id to be passed to mutation
-    const deleteHandler = () => {
-        deleteComment();
-    }
-
-    const deleteThisComment = () => {
-        console.log("comment")
-    }
+    
+    const deleteItem = (itemId, name) => (event) =>  {
+        console.log(itemId); 
+        event.preventDefault()
+        deleteComment({
+            // variables: {
+            _id: itemId,
+            username: name
+        //   }
+        })
+      }
 
     return (
         // {/* <!-- Comments container --> */}
@@ -38,10 +48,12 @@ const CommentsList = (props) => {
                         {/* footer needs to be conditionally rendered based on user */}
                         
                         {Auth.loggedIn() && (
+                        <form data-id={comment.id}>
                         <div className="card-footer text-center">
-                            <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil" onClick={() => deleteThisComment()}></i> Edit comment</a></span>
-                            <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler}></i> Delete comment</a></span>
+                            {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil" ></i> Edit comment</a></span> */}
+                            <button  onClick={deleteItem(comment._id, comment.username)}><span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can"></i> Delete comment</a></span></button>
                         </div>
+                        </form>
                         )}
                     </div>
                 </div>
