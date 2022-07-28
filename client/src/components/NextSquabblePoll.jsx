@@ -17,10 +17,23 @@ const NextSquabblePoll = (props) => {
   const [votePercentage2, setVotePercentage2] = useState(Math.round(twoVoteCount / totalVotes * 100));
   const [votePercentage3, setVotePercentage3] = useState(Math.round(threeVoteCount / totalVotes * 100));
        
-  const [voteNextOptOne,{data:dataVote1}] = useMutation(NEXT_VOTE_ONE,);
-  const [voteNextOptTwo, {data:dataVote2}] = useMutation(NEXT_VOTE_TWO);
-  const [voteNextOptThree, {data:dataVote3}] = useMutation(NEXT_VOTE_THREE);
+  const [voteNextOptOne] = useMutation(NEXT_VOTE_ONE, {
+    onCompleted: (data) => {
+      setAllVotePercentage(data.voteNextOptOne)
+      }
+  });
+  const [voteNextOptTwo] = useMutation(NEXT_VOTE_TWO, {
+    onCompleted: (data) => {
+      setAllVotePercentage(data.voteNextOptTwo)
+      }
+  });
+  const [voteNextOptThree] = useMutation(NEXT_VOTE_THREE, {
+    onCompleted: (data) => {
+      setAllVotePercentage(data.voteNextOptThree)
+      }
+  });
 
+  
   const setAllVotePercentage = (voteData) => {
     console.log(voteData)
     const {oneVoteCount, twoVoteCount, threeVoteCount} = voteData
@@ -32,16 +45,13 @@ const NextSquabblePoll = (props) => {
   const handleClick = (event) => {
     
       if(event.currentTarget.id === "choice1" ) {
-        voteNextOptOne()
-        .then(setAllVotePercentage(dataVote1.voteNextOptOne))   
+        voteNextOptOne()   
       }
       else if (event.currentTarget.id === "choice2") {
-        voteNextOptTwo()
-        .then(setAllVotePercentage(dataVote2.voteNextOptTwo))        
+        voteNextOptTwo()      
       }
       else {
-        voteNextOptThree()
-        .then(setAllVotePercentage(dataVote3.voteNextOptThree))   
+        voteNextOptThree()   
       }  
   
     };
