@@ -9,6 +9,7 @@ const CommentsList = (props) => {
     // delete function, needs comment id to be passed to mutation
     
     const deleteHandler = (comment) => {
+        console.log(comment);
         deleteComment({variables: {commentId: comment._id}});
     }
 
@@ -34,7 +35,7 @@ const CommentsList = (props) => {
                         {/* footer needs to be conditionally rendered based on user */}
                         <div className="card-footer text-center">
                             {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span> */}
-                            <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler(comment)}></i> delete comment</a></span>
+                            <span className="delete m-2"><button onClick={() => deleteHandler(comment)} className="btn btn-primary-outline"><i className="fa-solid fa-trash-can" ></i> delete comment</button></span>
                         </div>
                     </div>
                 </div>
