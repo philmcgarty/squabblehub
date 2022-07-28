@@ -5,10 +5,11 @@ import { COMMENT_DELETE } from "../utils/mutations";
 const CommentsList = (props) => {
     
     const [deleteComment] = useMutation(COMMENT_DELETE);
-
+    //console.log(props.comments[0])
     // delete function, needs comment id to be passed to mutation
-    const deleteHandler = () => {
-        deleteComment();
+    
+    const deleteHandler = (comment) => {
+        deleteComment({variables: {commentId: comment._id}});
     }
 
     return (
@@ -32,8 +33,8 @@ const CommentsList = (props) => {
                         </div>
                         {/* footer needs to be conditionally rendered based on user */}
                         <div className="card-footer text-center">
-                            <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span>
-                            <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler}></i> delete comment</a></span>
+                            {/* <span className="edit m-2"><a href="#"><i className="fa-solid fa-pencil"></i> edit comment</a></span> */}
+                            <span className="delete m-2"><a href="#"><i className="fa-solid fa-trash-can" onClick={deleteHandler(comment)}></i> delete comment</a></span>
                         </div>
                     </div>
                 </div>
